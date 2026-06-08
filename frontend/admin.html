@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Picksy Admin</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:#060614;color:#f5f5ff;font-family:Inter,system-ui, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji",sans-serif}.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 70px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}.title{font-size:1.7rem;font-weight:900;background:linear-gradient(135deg,#8b5cf6,#ec4899,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.actions{display:flex;gap:8px;flex-wrap:wrap}.link,.btn{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#fff;text-decoration:none;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer;font-family:inherit}.btn:hover,.link:hover{border-color:#8b5cf6}.btn-primary{background:linear-gradient(135deg,#8b5cf6,#ec4899);border:0}.btn-danger{color:#ff8b8b;border-color:rgba(239,68,68,.35)}.btn-warn{color:#fbbf24;border-color:rgba(251,191,36,.35)}.tabs{display:flex;gap:6px;overflow-x:auto;padding:5px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.055);border-radius:16px;margin-bottom:20px}.tab{white-space:nowrap;border:0;background:transparent;color:rgba(255,255,255,.62);padding:11px 16px;border-radius:12px;font-weight:900;cursor:pointer}.tab.active{background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff}.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}.card{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.055);border-radius:20px;padding:18px}.num{font-size:2rem;font-weight:900;color:#fff}.label{color:rgba(255,255,255,.55);font-size:.82rem;margin-top:4px}.section{font-weight:900;font-size:1.05rem;margin:22px 0 12px}.table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px}.table th,.table td{border-bottom:1px solid rgba(255,255,255,.08);padding:11px 10px;text-align:left;font-size:.84rem}.table th{color:rgba(255,255,255,.52);text-transform:uppercase;font-size:.72rem;letter-spacing:.04em}.input,.textarea,.select{width:100%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);color:#fff;border-radius:12px;padding:11px 12px;font-family:inherit;outline:none}.textarea{min-height:86px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.setting{display:grid;grid-template-columns:1.1fr 1.5fr;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07)}.setting-name b{display:block}.setting-name small{display:block;color:rgba(255,255,255,.48);line-height:1.35;margin-top:3px}.toggle{position:relative;width:48px;height:26px;display:inline-block}.toggle input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:rgba(255,255,255,.14);border-radius:999px;transition:.18s}.slider:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.18s}.toggle input:checked+.slider{background:#8b5cf6}.toggle input:checked+.slider:before{transform:translateX(22px)}.badge{display:inline-flex;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:900}.ok{background:rgba(6,214,160,.14);color:#06d6a0}.bad{background:rgba(239,68,68,.14);color:#ef4444}.info{background:rgba(139,92,246,.14);color:#a78bfa}.empty{padding:28px;text-align:center;color:rgba(255,255,255,.45)}.toast{position:fixed;right:16px;bottom:16px;background:#11112a;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 16px;box-shadow:0 20px 50px rgba(0,0,0,.45);display:none;z-index:20}.toast.show{display:block}.bar{height:120px;display:flex;align-items:flex-end;gap:8px}.bar-col{flex:1;display:flex;flex-direction:column;gap:4px;align-items:center}.bar-fill{width:100%;min-height:4px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#ec4899,#8b5cf6)}.bar small{font-size:.7rem;color:rgba(255,255,255,.48)}@media(max-width:720px){.row,.setting{grid-template-columns:1fr}.table{display:block;overflow-x:auto}.wrap{padding:14px 10px 60px}.tab{padding:9px 12px}}
+</style>
+</head>
+<body>
+<div class="wrap" id="admin-wrap">
+  <!-- Access denied overlay -->
+  <div id="admin-denied" style="display:none;text-align:center;padding:80px 20px">
+    <div style="font-size:4rem;margin-bottom:16px">🔒</div>
+    <h1 style="font-size:1.6rem;font-weight:900;margin-bottom:12px;background:linear-gradient(135deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Доступ заборонено</h1>
+    <p style="color:rgba(255,255,255,.5);font-size:1rem;margin-bottom:24px">Ця сторінка доступна тільки адміністраторам.<br>Увійдіть адмін-акаунтом на сайті і поверніться сюди.</p>
+    <a class="link" href="/" style="font-size:1rem">← Повернутись на сайт</a>
+  </div>
+  <!-- Admin content -->
+  <div id="admin-content" style="display:none">
+  <div class="head">
+    <div class="title">⚡ Picksy Admin</div>
+    <div class="actions"><a class="link" href="/">← На сайт</a><a class="link" href="/api/admin/export/users">📥 CSV</a><button class="btn" onclick="reloadAll()">🔄 Оновити</button></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-tab="dash">📊 Дашборд</button>
+    <button class="tab" data-tab="settings">⚙️ Налаштування</button>
+    <button class="tab" data-tab="banners">📢 Банери</button>
+    <button class="tab" data-tab="users">👥 Користувачі</button>
+    <button class="tab" data-tab="feedback">💬 Відгуки</button>
+    <button class="tab" data-tab="ann">📣 Оголошення</button>
+    <button class="tab" data-tab="logs">📋 Логи</button>
+    <button class="tab" data-tab="game">🎮 Гра</button>
+    <button class="tab" data-tab="freemium">💰 Freemium</button>
+    <button class="tab" data-tab="analytics">📈 Аналітика</button>
+    <button class="tab" data-tab="roles">🛡 Ролі</button>
+    <button class="tab" data-tab="collections">📂 Колекції</button>
+    <button class="tab" data-tab="system">🖥 Система</button>
+    <button class="tab" data-tab="blog">📝 Блог</button>
+  </div>
+
+  <section id="panel-dash" class="panel active"><div class="grid" id="stats"></div><div class="section">Активність за 7 днів</div><div class="card"><div class="bar" id="chart"></div></div><div class="section" style="margin-top:16px">🏆 Топ-10 активних користувачів</div><div class="card" id="top-users"></div><div class="section" style="margin-top:16px">🎬 Топ збережених фільмів</div><div class="card" id="top-movies"></div></section>
+  <section id="panel-settings" class="panel"><div class="section">Основні перемикачі</div><div class="card" id="settings-box"></div></section>
+  <section id="panel-banners" class="panel"><div class="section">Банери, реклама, popup</div><div class="card" id="banners-box"></div></section>
+  <section id="panel-users" class="panel">
+    <div class="row" style="margin-bottom:12px">
+      <input class="input" id="user-search" placeholder="Пошук email / username">
+      <button class="btn btn-primary" onclick="loadUsers(1)">Пошук</button>
+      <button class="btn" onclick="exportUsers()">📥 CSV</button>
+    </div>
+    <div class="row" style="margin-bottom:12px;gap:6px;flex-wrap:wrap">
+      <span style="color:rgba(255,255,255,.5);font-size:.8rem">Масові дії (обраних):</span>
+      <button class="btn btn-warn" onclick="bulkAction('ban')">🚫 Бан</button>
+      <button class="btn" onclick="bulkAction('unban')">✅ Розбан</button>
+      <button class="btn btn-primary" onclick="bulkAction('verify')">✓ Верифікувати</button>
+      <button class="btn" onclick="bulkAction('unverify')">✗ Зняти</button>
+      <button class="btn btn-danger" onclick="if(confirm('Видалити обраних?'))bulkAction('delete')">🗑 Видалити</button>
+    </div>
+    <div class="card" id="users"></div>
+    <div class="row" style="margin-top:12px;gap:6px">
+      <button class="btn btn-warn" onclick="bulkBanInactive()">🚫 Бан неактивних (30д)</button>
+      <button class="btn btn-danger" onclick="if(confirm('Видалити ВСІ неверифіковані акаунти?'))purgeUnverified()">🗑 Видалити без username</button>
+    </div>
+  </section>
+  <section id="panel-feedback" class="panel"><div class="card" id="feedback"></div></section>
+  <section id="panel-ann" class="panel"><div class="card"><div class="row"><input class="input" id="ann-msg" placeholder="Текст оголошення"><select class="select" id="ann-type"><option value="info">Info</option><option value="warning">Warning</option><option value="success">Success</option></select></div><div class="row" style="margin-top:8px;align-items:center;gap:8px"><label style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.85rem"><input type="checkbox" id="ann-closeable" checked> Можна закрити</label></div><button class="btn btn-primary" style="margin-top:10px" onclick="createAnnouncement()">Створити</button></div><div class="card" style="margin-top:12px" id="ann-list"></div></section>
+  <section id="panel-logs" class="panel"><div class="row" style="margin-bottom:12px"><button class="btn" onclick="loadLogs()">🔄 Оновити</button><button class="btn btn-danger" onclick="if(confirm('Очистити логи старші 30 днів?'))clearOldLogs()">🗑 Старші 30д</button><button class="btn btn-danger" onclick="if(confirm('Видалити ВСІ логи?'))clearAllLogs()">🗑 Очистити все</button></div><div class="card" id="logs"></div></section>
+  <section id="panel-game" class="panel">
+    <div class="grid" id="game-stats"></div>
+    <div class="section">🎮 Гравці — Рейтинг та бани</div>
+    <div class="card" id="game-players"></div>
+    <div class="section" style="margin-top:16px">⚡ Активні матчі
+      <button class="btn" style="margin-left:10px;padding:6px 12px;font-size:.8rem" onclick="cancelAllActiveMatches()">❌ Скасувати всі активні</button>
+    </div>
+    <div class="card" id="game-active-matches"></div>
+    <div class="section" style="margin-top:16px">📋 Останні матчі</div>
+    <div class="card" id="game-matches"></div>
+  </section>
+  <section id="panel-freemium" class="panel">
+    <div class="section">💰 Freemium модель — повне керування</div>
+    <div class="card" style="background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.25)">
+      <div style="font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.78)">
+        <b style="color:#a78bfa">Як це працює:</b>
+        Коли <b>«Freemium модель»</b> увімкнена — кожен користувач має тариф (Free / Premium / Pro) з відповідними лімітами і фічами.
+        Коли вимкнена — <b>усі користувачі мають повний доступ</b> до всіх фіч (як Pro), ліміти не діють.
+        <br><br>
+        <b style="color:#a78bfa">Фічі тарифів:</b><br>
+        • <b>Free</b>: підбори/день і ліміт збережень (нижче), Movie DNA, Кінозодіак, 1 Duo/день.<br>
+        • <b>Premium</b>: необмежений підбір/збереження, AI пошук, Колекції, без реклами, Психоаналіз, Movie Gifts, кастомний банер, розширені бейджі, 5 Duo/день.<br>
+        • <b>Pro</b>: усе з Premium + API доступ, статистика переглядів, пріоритет AI, ранній доступ, безлімітний Duo, пріоритетна підтримка.
+      </div>
+    </div>
+    <div class="card" id="freemium-settings-box" style="margin-top:12px"></div>
+    <div class="section" style="margin-top:16px">👥 Підписки користувачів</div>
+    <div class="card" id="freemium-subscriptions"></div>
+    <div class="section" style="margin-top:16px">🎯 Встановити підписку</div>
+    <div class="card">
+      <div class="row" style="gap:8px;flex-wrap:wrap;align-items:center">
+        <input class="input" id="sub-user-id" placeholder="User ID" style="max-width:120px">
+        <select class="input" id="sub-tier" style="max-width:140px">
+          <option value="free">Free</option>
+          <option value="premium">Premium</option>
+          <option value="pro">Pro</option>
+        </select>
+        <input class="input" id="sub-days" type="number" value="30" placeholder="Днів" style="max-width:90px">
+        <button class="btn btn-primary" onclick="setUserSubscription()">Застосувати</button>
+      </div>
+    </div>
+    <div class="section" style="margin-top:16px">💳 Запити на оплату</div>
+    <div class="card" id="payment-requests-box"></div>
+  </section>
+  <section id="panel-analytics" class="panel">
+    <div class="section">📈 Аналітика поведінки — повне керування</div>
+    <div class="card" id="analytics-settings-box"></div>
+    <div class="section" style="margin-top:16px">📊 Огляд</div>
+    <div class="grid" id="analytics-stats"></div>
+    <div class="section" style="margin-top:16px">🔀 Воронка конверсії (30 днів)</div>
+    <div class="card" id="analytics-funnel"></div>
+    <div class="section" style="margin-top:16px">📅 Сесії за 14 днів</div>
+    <div class="card"><div class="bar" id="analytics-sessions-chart"></div></div>
+    <div class="section" style="margin-top:16px">🔝 Топ подій (7 днів)</div>
+    <div class="card" id="analytics-top-events"></div>
+    <div class="section" style="margin-top:16px">🗑 Очистити аналітику</div>
+    <div class="card">
+      <button class="btn btn-danger" onclick="if(confirm('Видалити ВСІ дані аналітики?'))clearAnalytics()">🗑 Очистити всі дані аналітики</button>
+    </div>
+  </section>
+  <section id="panel-roles" class="panel">
+    <div class="section">🛡 Управління ролями</div>
+    <div class="card">
+      <div class="section" style="margin-top:0">📨 Запросити стаф по email</div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;align-items:center">
+        <input class="input" id="invite-email" placeholder="Email користувача" style="max-width:240px">
+        <select class="input" id="invite-role" style="max-width:200px">
+          <option value="media">📺 Media (бейдж + Pro)</option>
+          <option value="content-manager">📝 Content Manager</option>
+          <option value="editor">✏️ Editor</option>
+          <option value="support">🎧 Support</option>
+          <option value="moderator">🛡 Moderator</option>
+          <option value="admin">⭐ Admin</option>
+        </select>
+        <button class="btn btn-primary" onclick="inviteStaff()">Запросити</button>
+      </div>
+      <div style="margin-top:6px"><input class="input" id="invite-message" placeholder="Коментар (опціонально)" style="max-width:440px"></div>
+    </div>
+    <div class="section" style="margin-top:16px">👑 Superadmin</div>
+    <div class="card">
+      <p style="color:rgba(255,255,255,.5);font-size:.85rem;margin-bottom:12px">Призначити свій акаунт як superadmin (найвищий рівень доступу)</p>
+      <button class="btn btn-primary" onclick="if(confirm('Призначити себе superadmin?'))makeSuperadmin()">👑 Стати Superadmin</button>
+    </div>
+    <div class="section" style="margin-top:16px">📋 Audit Log — Історія змін ролей</div>
+    <div class="card" id="role-audit-log"></div>
+  </section>
+  <section id="panel-collections" class="panel">
+    <div class="section">📂 Усі колекції користувачів</div>
+    <div class="row" style="margin-bottom:12px;gap:8px;flex-wrap:wrap;align-items:center">
+      <input class="input" id="adm-coll-search" placeholder="Пошук за назвою / власником / ID / slug" style="min-width:260px"/>
+      <select class="select" id="adm-coll-vis" style="width:160px">
+        <option value="">— Усі видимості —</option>
+        <option value="public">🌍 Публічні</option>
+        <option value="unlisted">🔗 За посиланням</option>
+        <option value="private">🔒 Приватні</option>
+      </select>
+      <select class="select" id="adm-coll-sort" style="width:160px">
+        <option value="recent">🆕 Нові</option>
+        <option value="popular">🔥 Популярні</option>
+        <option value="items">👁 За переглядами</option>
+      </select>
+      <select class="select" id="adm-coll-limit" style="width:100px">
+        <option value="50">50</option>
+        <option value="100" selected>100</option>
+        <option value="200">200</option>
+      </select>
+      <button class="btn btn-primary" onclick="loadAdminCollections(0)">🔍 Пошук</button>
+      <button class="btn" onclick="loadAdminCollections(0)">🔄 Оновити</button>
+      <span id="adm-coll-stats" style="margin-left:auto;color:#94a3b8;font-size:.85rem;font-weight:700"></span>
+    </div>
+    <div class="row" style="margin-bottom:12px;gap:8px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:.78rem;color:#94a3b8;font-weight:700">Масові дії:</span>
+      <button class="btn btn-sm" onclick="adminBulkSetVisibility('public')">→ Публічні</button>
+      <button class="btn btn-sm" onclick="adminBulkSetVisibility('unlisted')">→ За посиланням</button>
+      <button class="btn btn-sm" onclick="adminBulkSetVisibility('private')">→ Приватні</button>
+      <button class="btn btn-sm btn-danger" onclick="adminBulkDelete()">🗑 Видалити вибрані</button>
+      <span style="margin-left:auto;font-size:.78rem;color:#94a3b8" id="adm-coll-selected">0 вибрано</span>
+    </div>
+    <div class="card" id="adm-coll-list"></div>
+    <div class="row" id="adm-coll-pager" style="margin-top:12px;justify-content:center;gap:8px"></div>
+  </section>
+  <section id="panel-system" class="panel">
+    <div class="section">🖥 Інформація про систему</div>
+    <div class="grid" id="system-info"></div>
+    <div class="section" style="margin-top:16px">🔑 API ключі</div>
+    <div class="card" id="api-keys-info"></div>
+    <div class="section" style="margin-top:16px">⚡ Швидкі дії</div>
+    <div class="card">
+      <div class="row" style="gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="clearMatchQueue()">🧹 Очистити чергу матчів</button>
+        <button class="btn btn-warn" onclick="if(confirm('Скинути rate limiter?'))resetRateLimiter()">🔓 Скинути Rate Limiter</button>
+      </div>
+    </div>
+  </section>
+  <section id="panel-blog" class="panel">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px">
+    <div style="font-size:1.2rem;font-weight:900">📝 Блог</div>
+    <button class="btn btn-primary" onclick="blogShowCreate()">➕ Новий пост</button>
+  </div>
+  <div id="blog-list-panel">
+    <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <input class="input" id="blog-search" placeholder="Пошук за назвою або тегом..." style="flex:1;min-width:200px" oninput="clearTimeout(window._bst);window._bst=setTimeout(()=>blogLoad(1),400)">
+      <button class="btn" onclick="blogLoad(1)">🔍</button>
+    </div>
+    <div class="card" style="overflow-x:auto">
+      <table class="table" id="blog-table">
+        <thead><tr><th>Назва</th><th>Теги</th><th>AI</th><th>Статус</th><th>Перегляди</th><th>Дата</th><th>Дії</th></tr></thead>
+        <tbody id="blog-tbody"></tbody>
+      </table>
+    </div>
+    <div id="blog-pagination" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;justify-content:center"></div>
+  </div>
+  <div id="blog-editor-panel" style="display:none">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">
+      <h3 id="blog-editor-title" style="font-size:1.05rem;font-weight:900">Новий пост</h3>
+      <button id="blog-preview-btn" class="btn" style="display:none" onclick="blogPreview()" title="Відкрити опублікований пост у новій вкладці">👁 Переглянути</button>
+      <button id="blog-copy-link-btn" class="btn" style="display:none" onclick="blogCopyLink()" title="Скопіювати посилання на пост">🔗 Копіювати лінк</button>
+      <button class="btn" style="margin-left:auto" onclick="blogCancelEdit()">✖ Скасувати</button>
+    </div>
+    <div class="blog-adm-section">
+      <span class="blog-adm-label">Заголовок *</span>
+      <input class="input" id="blog-f-title" placeholder="Заголовок поста">
+      <div class="blog-adm-row" style="margin-top:10px">
+        <div><span class="blog-adm-label">Обкладинка (URL)</span><input class="input" id="blog-f-cover" placeholder="https://..."></div>
+        <div><span class="blog-adm-label">Теги (через кому)</span><input class="input" id="blog-f-tags" placeholder="кіно, серіали, огляд"></div>
+      </div>
+      <span class="blog-adm-label" style="margin-top:10px">Короткий опис (excerpt)</span>
+      <textarea class="textarea" id="blog-f-excerpt" rows="3" placeholder="2-3 речення..."></textarea>
+      <span class="blog-adm-label">Контент (HTML)</span>
+      <textarea class="textarea" id="blog-f-content" rows="22" placeholder="Повний HTML контент поста... Підказка: щоб додати посилання на фільм або серіал з сайту, обгорни назву маркером [[MOVIE:Inception (2010)]] або [[TV:Breaking Bad]] — Picksy сам знайде по TMDB і замінить на гарне посилання з постером, рейтингом та жанрами."></textarea>
+      <div style="margin-top:6px;padding:10px 12px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.22);border-radius:10px;font-size:.82rem;color:rgba(255,255,255,.78);line-height:1.5">
+        💡 <b>Інлайн-посилання на фільми:</b> обгорни назву маркером <code style="background:rgba(0,0,0,.3);padding:1px 5px;border-radius:4px">[[MOVIE:Inception (2010)]]</code> або <code style="background:rgba(0,0,0,.3);padding:1px 5px;border-radius:4px">[[TV:Breaking Bad]]</code>. При збереженні Picksy знайде фільм у TMDB і замінить маркер на красиве посилання на <code style="background:rgba(0,0,0,.3);padding:1px 5px;border-radius:4px">/descmovie/&lt;id&gt;</code>. Внизу статті автоматично з'явиться секція «У статті згадуються» з картками (постер + рейтинг + жанри).
+      </div>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.85rem;cursor:pointer"><input type="checkbox" id="blog-f-published"> Опублікувати</label>
+        <label style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.85rem;cursor:pointer;margin-left:12px"><input type="checkbox" id="blog-f-ai"> AI-стаття</label>
+      </div>
+      <div style="margin-top:10px">
+        <span class="blog-adm-label">Бейджик типу контенту</span>
+        <select class="select" id="blog-f-content-type" style="max-width:240px">
+          <option value="general">🏷 Загальне</option>
+          <option value="movies">🎬 Фільми</option>
+          <option value="tv">📺 Серіали</option>
+          <option value="books">📚 Книги</option>
+          <option value="mixed">🎭 Мікс</option>
+        </select>
+      </div>
+    </div>
+    <div class="blog-adm-ai">
+      <div style="font-size:.95rem;font-weight:800;margin-bottom:12px;color:#a78bfa">🤖 Генерація через AI</div>
+      <input class="input" id="blog-ai-topic" placeholder="Тема для генерації (напр: 'Топ-10 серіалів 2025')">
+      <div class="blog-adm-row" style="margin-top:8px">
+        <select class="select" id="blog-ai-lang"><option value="uk">🇺🇦 Українська</option><option value="en">🇬🇧 English</option></select>
+        <select class="select" id="blog-ai-tone"><option value="engaging">✨ Захопливий</option><option value="professional">💼 Професійний</option><option value="casual">😊 Розслаблений</option></select>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="blogGenerateAI()">✨ Згенерувати пост через AI</button>
+      <div id="blog-ai-status"></div>
+    </div>
+    <div class="blog-adm-seo">
+      <div style="font-size:.95rem;font-weight:800;margin-bottom:12px;color:#06d6a0">🔍 SEO налаштування</div>
+      <span class="blog-adm-label">Meta Title <span class="blog-adm-char" id="blog-mt-count">0/60</span></span>
+      <input class="input" id="blog-f-meta-title" maxlength="60" placeholder="SEO заголовок до 60 символів" oninput="blogCharCount('blog-f-meta-title','blog-mt-count',60)">
+      <span class="blog-adm-label">Meta Description <span class="blog-adm-char" id="blog-md-count">0/160</span></span>
+      <textarea class="textarea" id="blog-f-meta-desc" rows="3" maxlength="160" placeholder="SEO опис до 160 символів" oninput="blogCharCount('blog-f-meta-desc','blog-md-count',160)"></textarea>
+      <span class="blog-adm-label">Meta Keywords</span>
+      <input class="input" id="blog-f-meta-kw" placeholder="ключове слово 1, ключове слово 2, ...">
+      <span class="blog-adm-label">OG Image (URL)</span>
+      <input class="input" id="blog-f-og-img" placeholder="https://... (якщо відрізняється від обкладинки)">
+      <button class="btn" style="margin-top:10px" onclick="blogGenerateSEO()">🔍 Авто-SEO з контенту</button>
+    </div>
+    <div class="blog-adm-actions">
+      <button class="btn btn-primary" style="min-width:140px" onclick="blogSave()">💾 Зберегти</button>
+      <button class="btn" onclick="blogCancelEdit()">✖ Скасувати</button>
+    </div>
+  </div>
+  </section>
+  </div>
+  </div><!-- /admin-content -->
+</div>
+<div class="toast" id="toast"></div>
+<style>
+.blog-adm-section{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px;margin-bottom:14px}
+.blog-adm-ai{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(236,72,153,.06));border:1px solid rgba(139,92,246,.25);border-radius:16px;padding:18px;margin-bottom:14px}
+.blog-adm-seo{background:rgba(6,214,160,.04);border:1px solid rgba(6,214,160,.18);border-radius:16px;padding:18px;margin-bottom:14px}
+.blog-adm-label{color:rgba(255,255,255,.55);font-size:.78rem;margin-bottom:5px;margin-top:12px;display:block;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.blog-adm-label:first-child{margin-top:0}
+.blog-adm-char{color:rgba(255,255,255,.35);font-size:.75rem;margin-left:6px}
+.blog-adm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.blog-adm-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.ai-badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:700;background:rgba(6,214,160,.12);color:#06d6a0}
+.pub-badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:700}
+.pub-on{background:rgba(6,214,160,.12);color:#06d6a0}
+.pub-off{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4)}
+#blog-ai-status{margin-top:10px;font-size:.85rem;color:#a78bfa;min-height:20px}
+#blog-editor-panel .input,#blog-editor-panel .textarea,#blog-editor-panel .select{margin-bottom:2px}
+@media(max-width:600px){.blog-adm-row{grid-template-columns:1fr}}
+</style>
+<script>
+const API = location.origin;
+const token = localStorage.getItem('pfm_token') || '';
+const headers = {'Authorization':'Bearer '+token,'Content-Type':'application/json'};
+let SETTINGS = {};
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
+
+// Auth check — verify user is admin before showing panel.
+// Non-superadmin staff (moderator/editor/etc.) are redirected to /staff
+// which is the role-aware mini panel.
+async function checkAdminAccess(){
+    if(!token){document.getElementById('admin-denied').style.display='block';return false}
+    try{
+        const r=await fetch(API+'/api/auth/me',{headers:{'Authorization':'Bearer '+token}});
+        if(!r.ok){document.getElementById('admin-denied').style.display='block';return false}
+        const user=await r.json();
+        const isSuperadmin=user.role==='superadmin'||user.email==='ghoulghoul1007@gmail.com'||(user.is_admin&&user.role!=='admin');
+        const staffRoles=['content-manager','editor','support','moderator','admin'];
+        if(!isSuperadmin){
+            if(staffRoles.includes(user.role||'')){
+                window.location.replace('/staff');
+                return false;
+            }
+            document.getElementById('admin-denied').style.display='block';
+            return false;
+        }
+        document.getElementById('admin-content').style.display='block';
+        return true;
+    }catch(e){document.getElementById('admin-denied').style.display='block';return false}
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function roleIcon(role){const icons={'media':'📺','content-manager':'📝','editor':'✏️','support':'🎧','moderator':'🛡️','admin':'⭐','superadmin':'👑'};return (icons[role]||'')+ ' ' + role}
+function setTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+tab));if(tab==='users')loadUsers(1);if(tab==='feedback')loadFeedback();if(tab==='ann')loadAnnouncements();if(tab==='logs')loadLogs();if(tab==='settings'||tab==='banners')loadSettings();if(tab==='game')loadGamePlayers();if(tab==='roles')loadRoleAuditLog();if(tab==='collections')loadAdminCollections()}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+async function jget(url){const r=await fetch(API+url,{headers});if(!r.ok)throw new Error(await r.text());return r.json()}
+async function jpost(url,body){const r=await fetch(API+url,{method:'POST',headers,body:JSON.stringify(body||{})});if(!r.ok)throw new Error(await r.text());return r.json()}
+async function loadStats(){try{const d=await jget('/api/admin/stats');document.getElementById('stats').innerHTML=[['Користувачі',d.total_users],['Нові сьогодні',d.new_users_today],['Підбори',d.total_picks],['Підбори сьогодні',d.picks_today],['Фільми',d.saved_movies],['Серіали',d.saved_tv],['Книги',d.saved_books]].map(x=>`<div class="card"><div class="num">${x[1]||0}</div><div class="label">${x[0]}</div></div>`).join('');const max=Math.max(1,...(d.activity_7d||[]).map(x=>x.picks));document.getElementById('chart').innerHTML=(d.activity_7d||[]).map(x=>`<div class="bar-col"><div class="bar-fill" style="height:${Math.max(4,x.picks/max*100)}px"></div><small>${x.picks}</small><small>${String(x.date).slice(5)}</small></div>`).join('')||'<div class="empty">Немає даних</div>'}catch(e){toast('Немає доступу до адмінки. Увійди адмін-акаунтом на сайті.')}}
+const basicSettings=[
+ ['maintenance_mode','Maintenance mode','Показує сторінку технічних робіт замість сайту'],['registrations_enabled','Реєстрація','Дозволити створювати нові акаунти'],['ai_enabled','AI пошук','Вмикає / вимикає AI рекомендації'],['public_profiles_enabled','Публічні профілі','Дозволити сторінки /u/username'],['profile_share_enabled','Шаринг профілю','Кнопки копіювання профілю'],['feedback_enabled','Відгуки','Форма відгуків користувачів'],['trending_enabled','Trending','Популярне на головній'],['daily_pick_enabled','Daily Pick','Добірка дня'],['achievements_enabled','Досягнення','Бейджі в профілі'],['game_enabled','🎮 Гра «Вгадай фільм»','Онлайн PvP гра — вгадай рейтинг та рік фільму. Вимкнення ховає кнопку, рейтинг та все пов'язане з грою']
+];
+function toggleRow(k,title,desc){return `<div class="setting"><div class="setting-name"><b>${title}</b><small>${desc}</small></div><label class="toggle"><input type="checkbox" ${SETTINGS[k]?'checked':''} onchange="saveSetting('${k}',this.checked)"><span class="slider"></span></label></div>`}
+function inputRow(k,title,desc,type='text'){return `<div class="setting"><div class="setting-name"><b>${title}</b><small>${desc}</small></div>${type==='textarea'?`<textarea class="textarea" onchange="saveSetting('${k}',this.value)">${esc(SETTINGS[k]||'')}</textarea>`:`<input class="input" value="${esc(SETTINGS[k]||'')}" onchange="saveSetting('${k}',this.value)">`}</div>`}
+function selectRow(k,title,desc,options){return `<div class="setting"><div class="setting-name"><b>${title}</b><small>${desc}</small></div><select class="select" onchange="saveSetting('${k}',this.value)">${options.map(o=>`<option value="${o.value}" ${SETTINGS[k]===o.value?'selected':''}>${o.label}</option>`).join('')}</select></div>`}
+async function loadSettings(){try{SETTINGS=await jget('/api/admin/settings');document.getElementById('settings-box').innerHTML=basicSettings.map(x=>toggleRow(...x)).join('')+inputRow('maintenance_text','Текст maintenance','Що бачить користувач під час технічних робіт','textarea');document.getElementById('banners-box').innerHTML=[toggleRow('promo_banner_enabled','🎯 Промо-банер (незакриваний)','Красивий банер над Trending. Користувач НЕ може його закрити'),inputRow('promo_banner_text','Текст промо-банера','Текст повідомлення','textarea'),inputRow('promo_banner_icon','Іконка промо-банера','Емодзі або символ (наприклад: 🎯 🔥 ⚡ 🎬 💎)'),inputRow('promo_banner_url','URL промо-банера','Посилання на кнопку (залиш пустим щоб сховати кнопку)'),inputRow('promo_banner_button','Кнопка промо-банера','Текст кнопки'),selectRow('promo_banner_gradient','Колір промо-банера','Стиль градієнта',[{value:'purple',label:'💜 Фіолетовий'},{value:'blue',label:'💙 Синій'},{value:'fire',label:'🔥 Вогняний'},{value:'green',label:'💚 Зелений'}]),'<hr style="border-color:rgba(255,255,255,.08);margin:18px 0">',toggleRow('top_banner_enabled','Верхній банер','Плашка зверху сайту'),inputRow('top_banner_text','Текст верхнього банера',''),inputRow('top_banner_url','URL верхнього банера',''),inputRow('top_banner_button','Кнопка верхнього банера',''),toggleRow('bottom_ad_enabled','Нижній рекламний бокс','Як cookie-блок знизу'),inputRow('bottom_ad_text','Текст нижнього боксу','','textarea'),inputRow('bottom_ad_url','URL нижнього боксу',''),inputRow('bottom_ad_button','Кнопка нижнього боксу',''),toggleRow('popup_enabled','Popup реклама','Вспливаюче вікно'),toggleRow('popup_force','Незакривний popup','Користувач не зможе закрити, поки не вимкнеш'),inputRow('popup_title','Заголовок popup',''),inputRow('popup_text','Текст popup','','textarea'),inputRow('popup_url','URL popup',''),inputRow('popup_button','Кнопка popup','')].join('')}catch(e){toast('Помилка налаштувань')}}
+async function saveSetting(k,v){try{SETTINGS=await jpost('/api/admin/settings',{[k]:v});toast('Збережено');loadSettings()}catch(e){toast('Не збережено')}}
+async function loadUsers(page=1){try{const q=document.getElementById('user-search')?.value||'';const d=await jget('/api/admin/users?page='+page+'&limit=40&search='+encodeURIComponent(q));const users=d.users||[];document.getElementById('users').innerHTML=users.length?`<table class="table"><thead><tr><th><input type="checkbox" onchange="toggleAllUsers(this)"></th><th>ID</th><th>Email</th><th>Username</th><th>Статус</th><th>Роль</th><th>Підбори</th><th>🔥 Стрік</th><th>Збережено</th><th>Дії</th></tr></thead><tbody>${users.map(u=>`<tr><td><input type="checkbox" class="user-checkbox" value="${u.id}"></td><td>${u.id}</td><td>${esc(u.email)}</td><td>${u.username?'@'+esc(u.username):'—'}</td><td><span class="badge ${u.is_banned?'bad':u.is_admin?'info':'ok'}">${u.is_banned?'Banned':u.is_admin?'Admin':'User'}</span>${u.is_verified?'<span class="badge info" style="margin-left:4px" title="Verified">✓</span>':''}${u.role&&u.role!=='user'&&!u.is_admin?'<span class="badge" style="margin-left:4px;background:rgba(139,92,246,.15);color:#a78bfa">'+roleIcon(u.role)+'</span>':''}</td><td><select class="select" style="width:140px;font-size:.75rem" onchange="setUserRole(${u.id},this.value)"><option value="user" ${u.role==='user'?'selected':''}>👤 User</option><option value="media" ${u.role==='media'?'selected':''}>📺 Media</option><option value="content-manager" ${u.role==='content-manager'?'selected':''}>📝 Content Manager</option><option value="editor" ${u.role==='editor'?'selected':''}>✏️ Editor</option><option value="support" ${u.role==='support'?'selected':''}>🎧 Support</option><option value="moderator" ${u.role==='moderator'?'selected':''}>🛡 Moderator</option><option value="admin" ${u.role==='admin'?'selected':''}>⭐ Admin</option><option value="superadmin" ${u.role==='superadmin'?'selected':''}>👑 Super Admin</option></select></td><td>${u.total_picks||0}</td><td><input type="number" class="input" style="width:70px;display:inline-block" value="${u.current_streak||0}" min="0" onchange="setUserStreak(${u.id},this.value)"> <small style="color:rgba(255,255,255,.4)">рек: ${u.best_streak||0}</small></td><td>🎬${u.saved_movies||0} 📺${u.saved_tv||0} 📚${u.saved_books||0}</td><td style="white-space:nowrap"><button class="btn btn-warn" onclick="toggleBan(${u.id})">${u.is_banned?'Розбан':'Бан'}</button> <button class="btn" onclick="toggleAdmin(${u.id})">Admin</button> <button class="btn ${u.is_verified?'btn-primary':''}" onclick="toggleVerified(${u.id})">${u.is_verified?'✓ Верифік.':'Верифік.'}</button> <button class="btn btn-danger" onclick="deleteUser(${u.id})">🗑</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Немає користувачів</div>'}catch(e){toast('Помилка користувачів')}}
+async function toggleBan(id){await fetch(API+'/api/admin/users/'+id+'/toggle-ban',{method:'POST',headers});loadUsers()}
+async function toggleAdmin(id){await fetch(API+'/api/admin/users/'+id+'/toggle-admin',{method:'POST',headers});loadUsers()}
+async function toggleVerified(id){await fetch(API+'/api/admin/users/'+id+'/toggle-verified',{method:'POST',headers});loadUsers()}
+async function setUserRole(uid,role){try{await jpost('/api/admin/users/'+uid+'/set-role',{role});toast('Роль оновлено');loadUsers()}catch(e){toast('Помилка')}}
+async function deleteUser(id){if(!confirm('Видалити користувача?'))return;await fetch(API+'/api/admin/users/'+id,{method:'DELETE',headers});loadUsers()}
+function toggleAllUsers(el){document.querySelectorAll('.user-checkbox').forEach(c=>c.checked=el.checked)}
+function getSelectedUserIds(){return Array.from(document.querySelectorAll('.user-checkbox:checked')).map(c=>parseInt(c.value))}
+async function bulkAction(action){const ids=getSelectedUserIds();if(!ids.length){toast('Оберіть користувачів');return}if(!confirm('Виконати '+action+' для '+ids.length+' користувачів?'))return;try{const r=await jpost('/api/admin/users/bulk-action',{action,user_ids:ids});toast(r.action+': '+r.affected+' змінено');loadUsers()}catch(e){toast('Помилка')}}
+async function setUserStreak(uid,val){try{await jpost('/api/admin/users/'+uid+'/set-streak',{streak:parseInt(val)||0});toast('Стрік оновлено')}catch(e){toast('Помилка')}}
+const catLabels={general:'💬 Загальне',bug:'🐛 Баг',suggestion:'💡 Пропозиція',content:'📄 Контент'};
+async function loadFeedback(){try{const arr=await jget('/api/admin/feedback');document.getElementById('feedback').innerHTML=arr.length?`<table class="table"><thead><tr><th>ID</th><th>Email</th><th>Категорія</th><th>Повідомлення</th><th>Статус</th><th>Дата</th><th>Дії</th></tr></thead><tbody>${arr.map(f=>`<tr><td>${f.id}</td><td>${esc(f.email||'—')}</td><td><span class="badge info">${catLabels[f.category]||f.category||'—'}</span></td><td style="max-width:300px;word-break:break-word">${esc(f.message)}</td><td><span class="badge ${f.status==='done'?'ok':f.status==='read'?'info':'bad'}">${f.status==='done'?'Готово':f.status==='read'?'Прочитано':'Нове'}</span></td><td>${f.created_at}</td><td style="white-space:nowrap"><button class="btn" onclick="feedbackStatus(${f.id},'read')">👁</button> <button class="btn btn-primary" onclick="feedbackStatus(${f.id},'done')">✓</button> <button class="btn btn-danger" onclick="deleteFeedback(${f.id})">🗑</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Відгуків немає</div>'}catch(e){toast('Помилка відгуків: '+e.message)}}
+async function feedbackStatus(id,status){try{await jpost('/api/admin/feedback/'+id+'/status',{status});toast('Статус оновлено');loadFeedback()}catch(e){toast('Помилка: '+e.message)}}
+async function deleteFeedback(id){if(!confirm('Видалити відгук?'))return;try{await fetch(API+'/api/admin/feedback/'+id,{method:'DELETE',headers});toast('Видалено');loadFeedback()}catch(e){toast('Помилка')}}
+async function loadAnnouncements(){try{const arr=await jget('/api/admin/announcements');document.getElementById('ann-list').innerHTML=arr.length?`<table class="table"><thead><tr><th>ID</th><th>Текст</th><th>Тип</th><th>Закрив.</th><th>Статус</th><th>Дії</th></tr></thead><tbody>${arr.map(a=>`<tr><td>${a.id}</td><td>${esc(a.message)}</td><td>${a.type}</td><td>${a.closeable?'✅':'🔒'}</td><td>${a.active?'🟢':'⚪'}</td><td><button class="btn" onclick="toggleAnn(${a.id})">Перемкнути</button><button class="btn btn-danger" onclick="deleteAnn(${a.id})">🗑</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Оголошень немає</div>'}catch(e){toast('Помилка оголошень')}}
+async function createAnnouncement(){const message=document.getElementById('ann-msg').value.trim();if(!message)return;const closeable=document.getElementById('ann-closeable').checked;await jpost('/api/admin/announcements',{message,type:document.getElementById('ann-type').value,closeable});document.getElementById('ann-msg').value='';loadAnnouncements()}
+async function toggleAnn(id){await fetch(API+'/api/admin/announcements/'+id+'/toggle',{method:'POST',headers});loadAnnouncements()}
+async function deleteAnn(id){await fetch(API+'/api/admin/announcements/'+id,{method:'DELETE',headers});loadAnnouncements()}
+async function loadLogs(){try{const d=await jget('/api/admin/logs?page=1&limit=80');document.getElementById('logs').innerHTML=(d.logs||[]).length?`<table class="table"><thead><tr><th>ID</th><th>User</th><th>Action</th><th>Detail</th><th>IP</th><th>Date</th></tr></thead><tbody>${d.logs.map(l=>`<tr><td>${l.id}</td><td>${esc(l.email||'—')}</td><td>${esc(l.action)}</td><td>${esc(l.detail||'')}</td><td>${l.ip||'—'}</td><td>${l.created_at}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Логів немає</div>'}catch(e){toast('Помилка логів')}}
+async function loadGamePlayers(){try{const st=await jget('/api/admin/game/stats');document.getElementById('game-stats').innerHTML=[['Гравців',st.total_players],['Матчів',st.total_matches],['Активних',st.active_matches],['Забанених',st.banned_players],['Сер. рейтинг',st.avg_rating]].map(x=>`<div class="card"><div class="num">${x[1]||0}</div><div class="label">${x[0]}</div></div>`).join('')}catch{}try{const arr=await jget('/api/admin/game/players');document.getElementById('game-players').innerHTML=arr.length?`<table class="table"><thead><tr><th>Гравець</th><th>Email</th><th>Рейтинг</th><th>W/L/D</th><th>Статус</th><th>Дії</th></tr></thead><tbody>${arr.map(p=>`<tr><td>${p.avatar_emoji||'👤'} ${esc(p.username||'—')}</td><td>${esc(p.email||'')}</td><td><input type="number" class="input" style="width:80px" value="${p.rating}" onchange="setGameRating(${p.user_id},this.value)"></td><td>${p.wins}/${p.losses}/${p.draws}</td><td><span class="badge ${p.game_banned?'bad':'ok'}">${p.game_banned?'Забанений':'Активний'}</span></td><td><button class="btn ${p.game_banned?'btn-primary':'btn-danger'}" onclick="toggleGameBan(${p.user_id})">${p.game_banned?'Розбанити':'Забанити'}</button> <button class="btn btn-warn" onclick="resetGameRating(${p.user_id})">Скинути</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Ніхто ще не грав</div>'}catch(e){toast('Помилка завантаження гравців')}try{const mm=await jget('/api/admin/game/matches');document.getElementById('game-matches').innerHTML=mm.length?`<table class="table"><thead><tr><th>Фільм</th><th>Гравець 1</th><th>Гравець 2</th><th>Статус</th><th>Дата</th></tr></thead><tbody>${mm.map(m=>`<tr><td>${esc(m.movie_title||'—')}</td><td>${esc(m.p1_name||'—')}</td><td>${esc(m.p2_name||'—')}</td><td><span class="badge ${m.status==='finished'?'ok':'info'}">${m.status}</span></td><td>${(m.created_at||'').slice(0,16)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Матчів немає</div>'}catch{}}
+async function setGameRating(uid,val){try{await jpost('/api/admin/game/set-rating/'+uid,{rating:parseInt(val)});toast('Рейтинг оновлено');loadGamePlayers()}catch(e){toast('Помилка')}}
+async function toggleGameBan(uid){try{await jpost('/api/admin/game/ban/'+uid);toast('Оновлено');loadGamePlayers()}catch(e){toast('Помилка')}}
+async function resetGameRating(uid){if(!confirm('Скинути рейтинг до 100?'))return;try{await jpost('/api/admin/game/reset/'+uid);toast('Скинуто');loadGamePlayers()}catch(e){toast('Помилка')}}
+async function loadActiveMatches(){try{const mm=await jget('/api/admin/game/matches?status=active');const box=document.getElementById('game-active-matches');if(!box)return;if(!mm.length){box.innerHTML='<div class="empty">Немає активних матчів</div>';return}box.innerHTML=`<table class="table"><thead><tr><th>ID</th><th>Фільм</th><th>Гравець 1</th><th>Гравець 2</th><th>Статус</th><th>Дії</th></tr></thead><tbody>${mm.map(m=>`<tr><td>${esc(m.id).slice(0,8)}...</td><td>${esc(m.movie_title||'—')}</td><td>${esc(m.p1_name||'—')}</td><td>${esc(m.p2_name||'—')}</td><td><span class="badge info">${m.status}</span></td><td><button class="btn btn-danger" onclick="cancelMatch('${m.id}')">Скасувати</button></td></tr>`).join('')}</tbody></table>`}catch(e){toast('Помилка')}}
+async function cancelMatch(id){try{await jpost('/api/admin/game/cancel-match/'+id);toast('Матч скасовано');loadActiveMatches();loadGamePlayers()}catch(e){toast('Помилка')}}
+async function cancelAllActiveMatches(){if(!confirm('Скасувати ВСІ активні матчі?'))return;try{await jpost('/api/admin/game/cancel-all-matches');toast('Всі матчі скасовано');loadActiveMatches();loadGamePlayers()}catch(e){toast('Помилка')}}
+async function loadSystemInfo(){try{const d=await jget('/api/admin/system-info');document.getElementById('system-info').innerHTML=[['Версія Python',d.python_version||'—'],['Uptime',d.uptime||'—'],['Користувачів',d.total_users||0],['DB Status',d.db_status||'—']].map(x=>`<div class="card"><div class="num" style="font-size:1rem">${x[1]}</div><div class="label">${x[0]}</div></div>`).join('');document.getElementById('api-keys-info').innerHTML=`<div style="display:grid;gap:8px">${[['TMDB',d.tmdb_configured],['Google Books',d.books_configured],['AI (Groq/OpenAI)',d.ai_configured]].map(x=>`<div class="setting"><b>${x[0]}</b><span class="badge ${x[1]?'ok':'bad'}">${x[1]?'✅ Налаштовано':'❌ Не налаштовано'}</span></div>`).join('')}</div>`}catch(e){toast('Помилка завантаження системної інформації')}}
+async function exportUsers(){window.location.href=API+'/api/admin/export/users'}
+async function bulkBanInactive(){if(!confirm('Забанити всіх користувачів без активності за 30 днів?'))return;try{const r=await jpost('/api/admin/bulk/ban-inactive');toast(r.message||'Виконано');loadUsers()}catch(e){toast('Помилка')}}
+async function purgeUnverified(){try{const r=await jpost('/api/admin/bulk/purge-no-username');toast(r.message||'Виконано');loadUsers()}catch(e){toast('Помилка')}}
+async function clearOldLogs(){try{const r=await jpost('/api/admin/logs/clear-old');toast(r.message||'Логи очищено');loadLogs()}catch(e){toast('Помилка')}}
+async function clearAllLogs(){try{const r=await jpost('/api/admin/logs/clear-all');toast(r.message||'Всі логи видалено');loadLogs()}catch(e){toast('Помилка')}}
+async function clearMatchQueue(){try{const r=await jpost('/api/admin/game/clear-queue');toast(r.message||'Чергу очищено')}catch(e){toast('Помилка')}}
+async function resetRateLimiter(){try{const r=await jpost('/api/admin/reset-rate-limiter');toast(r.message||'Rate limiter скинуто')}catch(e){toast('Помилка')}}
+async function loadTopUsers(){try{const arr=await jget('/api/admin/top-users');document.getElementById('top-users').innerHTML=arr.length?`<table class="table"><thead><tr><th>#</th><th>Email</th><th>Username</th><th>Підбори</th><th>🎬</th><th>📺</th><th>📚</th></tr></thead><tbody>${arr.map((u,i)=>`<tr><td>${i+1}</td><td>${esc(u.email)}</td><td>${u.username?'@'+esc(u.username):'—'}</td><td><b>${u.picks}</b></td><td>${u.movies}</td><td>${u.tv}</td><td>${u.books}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Немає даних</div>'}catch{}}
+async function loadTopContent(){try{const d=await jget('/api/admin/top-content');const movies=d.movies||[];document.getElementById('top-movies').innerHTML=movies.length?`<table class="table"><thead><tr><th>#</th><th>Назва</th><th>Збережень</th></tr></thead><tbody>${movies.map((m,i)=>`<tr><td>${i+1}</td><td>${esc(m.title)}</td><td><b>${m.count}</b></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Немає даних</div>'}catch{}}
+function reloadAll(){loadStats();loadTopUsers();loadTopContent();loadSettings();loadUsers();loadFeedback();loadAnnouncements();loadLogs();toast('Оновлено')}
+function setTab2(tab){if(tab==='game'){loadGamePlayers();loadActiveMatches()}if(tab==='system')loadSystemInfo();if(tab==='freemium')loadFreemium();if(tab==='analytics')loadAnalytics()}
+const origSetTab=setTab;setTab=function(tab){origSetTab(tab);setTab2(tab)}
+// ─── Freemium Admin ───
+const freemiumSettings=[
+ ['freemium_enabled','💰 Freemium модель','Увімкнути Freemium модель з тарифними планами Free/Premium/Pro. Вимкнення дає всім користувачам повний доступ.'],
+];
+const freemiumInputs=[
+ ['freemium_free_picks_per_day','Підборів/день (Free)','Кількість безкоштовних підборів на день для Free тарифу'],
+ ['freemium_free_save_limit','Ліміт збережень (Free)','Максимальна кількість збережених елементів для Free тарифу'],
+ ['freemium_premium_price_7d','Premium 7 днів ($)','Ціна Premium на 7 днів'],
+ ['freemium_premium_price_14d','Premium 14 днів ($)','Ціна Premium на 14 днів'],
+ ['freemium_premium_price_30d','Premium 30 днів ($)','Ціна Premium на 30 днів'],
+ ['freemium_pro_price_7d','Pro 7 днів ($)','Ціна Pro на 7 днів'],
+ ['freemium_pro_price_14d','Pro 14 днів ($)','Ціна Pro на 14 днів'],
+ ['freemium_pro_price_30d','Pro 30 днів ($)','Ціна Pro на 30 днів'],
+ ['freemium_payment_url','URL оплати','Посилання на зовнішню сторінку оплати (необов\'язково)'],
+ ['freemium_trial_days','Тест-період (днів)','Кількість днів безкоштовного Premium'],
+ ['freemium_bank_info','Реквізити банки/картки','Інформація про банку/картку для оплати (відображається на сторінці /pay)','textarea'],
+];
+const freemiumToggles=[
+ ['freemium_trial_enabled','🎁 Тест Premium','Дозволити 7-денний безкоштовний тест Premium підписки'],
+];
+async function loadFreemium(){
+  await loadSettings();
+  const box=document.getElementById('freemium-settings-box');
+  if(box) box.innerHTML=freemiumSettings.map(x=>toggleRow(...x)).join('')+freemiumToggles.map(x=>toggleRow(...x)).join('')+freemiumInputs.map(x=>inputRow(...x)).join('');
+  try{
+    const subs=await jget('/api/admin/subscriptions');
+    const box2=document.getElementById('freemium-subscriptions');
+    if(box2) box2.innerHTML=subs.length?`<table class="table"><thead><tr><th>User ID</th><th>Email</th><th>Username</th><th>Тариф</th><th>Початок</th><th>Закінчення</th><th>Дії</th></tr></thead><tbody>${subs.map(s=>`<tr><td>${s.user_id}</td><td>${esc(s.email)}</td><td>${s.username?'@'+esc(s.username):'—'}</td><td><span class="badge ${s.tier==='pro'?'info':s.tier==='premium'?'ok':''}">${s.tier.toUpperCase()}</span></td><td>${(s.started_at||'—').slice(0,10)}</td><td>${(s.expires_at||'—').slice(0,10)}</td><td><button class="btn btn-danger" onclick="setUserSub(${s.user_id},'free')">Скинути</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Підписок ще немає</div>';
+  }catch(e){toast('Помилка завантаження підписок')}
+  loadPaymentRequests();
+}
+async function setUserSubscription(){
+  const uid=document.getElementById('sub-user-id').value;
+  const tier=document.getElementById('sub-tier').value;
+  const days=document.getElementById('sub-days').value||30;
+  if(!uid){toast('Введіть User ID');return}
+  try{await jpost('/api/admin/subscriptions/'+uid,{tier,days:parseInt(days)});toast('Підписку встановлено');loadFreemium()}catch(e){toast('Помилка: '+e.message)}
+}
+async function setUserSub(uid,tier){
+  try{await jpost('/api/admin/subscriptions/'+uid,{tier,days:0});toast('Підписку скинуто');loadFreemium()}catch(e){toast('Помилка')}
+}
+async function loadPaymentRequests(){
+  try{
+    const d=await jget('/api/admin/payments');
+    const box=document.getElementById('payment-requests-box');
+    const payments=d.payments||[];
+    if(box) box.innerHTML=payments.length?`<table class="table"><thead><tr><th>ID</th><th>Email</th><th>Тариф</th><th>Днів</th><th>Сума</th><th>Картка/опис</th><th>Статус</th><th>Дата</th><th>Дії</th></tr></thead><tbody>${payments.map(p=>`<tr><td>${p.id}</td><td>${esc(p.email||'—')}</td><td><span class="badge ${p.tier==='pro'?'info':'ok'}">${p.tier.toUpperCase()}</span></td><td>${p.days}</td><td>$${p.amount}</td><td style="max-width:200px;word-break:break-all;font-size:.75rem">${esc(p.card_info||'—')}</td><td><span class="badge ${p.status==='approved'?'ok':p.status==='rejected'?'bad':''}">${p.status}</span></td><td style="font-size:.75rem">${(p.created_at||'').slice(0,16)}</td><td>${p.status==='pending'?`<button class="btn btn-primary" onclick="approvePayment(${p.id})">✓</button> <button class="btn btn-danger" onclick="rejectPayment(${p.id})">✗</button>`:''}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Запитів немає</div>';
+  }catch(e){toast('Помилка')}
+}
+async function approvePayment(id){try{await jpost('/api/admin/payments/'+id+'/approve',{});toast('Підписку активовано');loadPaymentRequests();loadFreemium()}catch(e){toast('Помилка')}}
+async function rejectPayment(id){try{await jpost('/api/admin/payments/'+id+'/reject',{});toast('Відхилено');loadPaymentRequests()}catch(e){toast('Помилка')}}
+
+// ─── Analytics Admin ───
+const analyticsSettings=[
+ ['analytics_enabled','📈 Аналітика','Увімкнути збір аналітики поведінки. Вимкнення повністю зупиняє збір даних.'],
+ ['analytics_heatmap_enabled','🔥 Heatmap кліків','Збирати дані кліків для побудови теплової карти.'],
+ ['analytics_session_recording_enabled','📹 Session Recording','Записувати сесії користувачів для UX аналізу (рухи миші, кліки, скрол).'],
+ ['analytics_funnel_enabled','🔀 Funnel аналіз','Трекінг воронки конверсії: гість → реєстрація → перший підбір → активний.'],
+];
+async function loadAnalytics(){
+  await loadSettings();
+  const box=document.getElementById('analytics-settings-box');
+  if(box) box.innerHTML=analyticsSettings.map(x=>toggleRow(...x)).join('');
+  try{
+    const d=await jget('/api/admin/analytics/overview');
+    document.getElementById('analytics-stats').innerHTML=[
+      ['Сесій всього',d.total_sessions],['Сесій сьогодні',d.sessions_today],
+      ['Подій всього',d.total_events],['Подій сьогодні',d.events_today],
+      ['Кліків (heatmap)',d.total_clicks]
+    ].map(x=>`<div class="card"><div class="num">${x[1]||0}</div><div class="label">${x[0]}</div></div>`).join('');
+    // Funnel
+    const f=d.funnel||{};
+    const funnelSteps=[['visit','👁 Візит'],['register','📝 Реєстрація'],['first_pick','🎬 Перший підбір'],['active','🔥 Активний']];
+    const maxF=Math.max(1,...Object.values(f));
+    document.getElementById('analytics-funnel').innerHTML=`<div style="display:flex;flex-direction:column;gap:10px">${funnelSteps.map(([k,label])=>{
+      const cnt=f[k]||0;const pct=Math.round(cnt/maxF*100);
+      return `<div style="display:flex;align-items:center;gap:12px"><span style="min-width:140px;font-weight:700">${label}</span><div style="flex:1;background:rgba(255,255,255,.06);border-radius:8px;height:28px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#8b5cf6,#ec4899);width:${pct}%;border-radius:8px;display:flex;align-items:center;padding-left:8px;font-size:.8rem;font-weight:800;min-width:40px">${cnt}</div></div><span style="min-width:40px;font-size:.8rem;color:rgba(255,255,255,.5)">${pct}%</span></div>`;
+    }).join('')}</div>`;
+    // Sessions chart
+    const sChart=d.sessions_chart||[];
+    const maxS=Math.max(1,...sChart.map(x=>x.count));
+    document.getElementById('analytics-sessions-chart').innerHTML=sChart.length?sChart.map(x=>`<div class="bar-col"><div class="bar-fill" style="height:${Math.max(4,x.count/maxS*100)}px"></div><small>${x.count}</small><small>${x.date.slice(5)}</small></div>`).join(''):'<div class="empty">Немає даних</div>';
+    // Top events
+    const te=d.top_events||[];
+    document.getElementById('analytics-top-events').innerHTML=te.length?`<table class="table"><thead><tr><th>Подія</th><th>Кількість</th></tr></thead><tbody>${te.map(e=>`<tr><td>${esc(e.event)}</td><td><b>${e.count}</b></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Подій ще немає</div>';
+  }catch(e){toast('Помилка аналітики: '+e.message)}
+}
+async function clearAnalytics(){
+  try{await jpost('/api/admin/analytics/clear');toast('Аналітику очищено');loadAnalytics()}catch(e){toast('Помилка')}
+}
+
+// ─── Roles management ───
+async function loadRoleAuditLog(){
+  try{
+    const logs=await jget('/api/admin/role-audit-log');
+    document.getElementById('role-audit-log').innerHTML=logs.length?
+      `<table class="table"><thead><tr><th>Дата</th><th>Користувач</th><th>Було</th><th>Стало</th><th>Змінив</th><th>Причина</th></tr></thead><tbody>${logs.map(l=>
+        `<tr><td>${l.created_at}</td><td>${esc(l.target_email||l.target_username||l.target_user_id)}</td><td>${roleIcon(l.old_role)}</td><td>${roleIcon(l.new_role)}</td><td>${esc(l.changed_by_email||l.changed_by_username||l.changed_by)}</td><td>${esc(l.reason||'—')}</td></tr>`
+      ).join('')}</tbody></table>`:
+      '<div class="empty">Змін ролей ще не було</div>';
+  }catch(e){toast('Помилка завантаження audit log')}
+}
+async function inviteStaff(){
+  const email=document.getElementById('invite-email')?.value?.trim();
+  const role=document.getElementById('invite-role')?.value||'content-manager';
+  const message=document.getElementById('invite-message')?.value?.trim()||'';
+  if(!email){toast('Введіть email');return}
+  try{
+    await jpost('/api/admin/staff/invite',{email,role,message});
+    toast('Роль '+role+' призначено для '+email);
+    document.getElementById('invite-email').value='';
+    document.getElementById('invite-message').value='';
+    loadRoleAuditLog();
+  }catch(e){toast('Помилка: '+e.message)}
+}
+async function makeSuperadmin(){
+  try{await jpost('/api/admin/make-superadmin');toast('Ви тепер superadmin! Перезавантажте сторінку.');loadRoleAuditLog()}catch(e){toast('Помилка: '+e.message)}
+}
+
+// ─── Collections (admin) ───
+let _admColl = { offset: 0, limit: 100, total: 0, list: [], selected: new Set() };
+function _admCollUpdateSelectedLabel(){
+  const el = document.getElementById('adm-coll-selected');
+  if (el) el.textContent = `${_admColl.selected.size} вибрано`;
+}
+function _admCollPager(){
+  const pager = document.getElementById('adm-coll-pager');
+  if (!pager) return;
+  const { offset, limit, total } = _admColl;
+  const page = Math.floor(offset / limit) + 1;
+  const last = Math.max(1, Math.ceil(total / limit));
+  if (total <= limit) { pager.innerHTML = ''; return; }
+  pager.innerHTML = `
+    <button class="btn btn-sm" ${offset === 0 ? 'disabled' : ''} onclick="loadAdminCollections(0)">⏮</button>
+    <button class="btn btn-sm" ${offset === 0 ? 'disabled' : ''} onclick="loadAdminCollections(${Math.max(0, offset - limit)})">‹</button>
+    <span style="padding:6px 12px;font-weight:700">Стор. ${page} / ${last}</span>
+    <button class="btn btn-sm" ${offset + limit >= total ? 'disabled' : ''} onclick="loadAdminCollections(${offset + limit})">›</button>
+    <button class="btn btn-sm" ${offset + limit >= total ? 'disabled' : ''} onclick="loadAdminCollections(${(last - 1) * limit})">⏭</button>
+  `;
+}
+async function loadAdminCollections(offset){
+  try{
+    const search=encodeURIComponent(document.getElementById('adm-coll-search')?.value||'');
+    const vis=encodeURIComponent(document.getElementById('adm-coll-vis')?.value||'');
+    const sort=encodeURIComponent(document.getElementById('adm-coll-sort')?.value||'recent');
+    const lim=parseInt(document.getElementById('adm-coll-limit')?.value||'100',10);
+    _admColl.limit = lim;
+    _admColl.offset = (typeof offset==='number') ? offset : _admColl.offset;
+    _admColl.selected.clear();
+    _admCollUpdateSelectedLabel();
+    const arr=await jget(`/api/admin/collections?q=${search}&visibility=${vis}&sort=${sort}&limit=${lim}&offset=${_admColl.offset}`);
+    const list=arr.collections||[];
+    _admColl.list = list;
+    _admColl.total = arr.total || list.length;
+    const stats=document.getElementById('adm-coll-stats');
+    if (stats) stats.textContent = `Усього: ${_admColl.total} · показано ${list.length}`;
+    const box=document.getElementById('adm-coll-list');
+    if(!list.length){box.innerHTML='<div class="empty">Колекцій не знайдено</div>';_admCollPager();return}
+    box.innerHTML=`<table class="table"><thead><tr>
+      <th style="width:22px"><input type="checkbox" id="adm-coll-checkall" onchange="adminToggleAll(this.checked)"></th>
+      <th>ID</th><th>Назва</th><th>Власник</th><th>Тайтлів</th><th>❤</th><th>💬</th><th>👁</th><th>👥</th><th>Видим.</th><th>Створено</th><th>Дії</th>
+    </tr></thead><tbody>${list.map(c=>{
+      const own=(c.owner&&(c.owner.username||c.owner.email))||'—';
+      const ownId=(c.owner&&c.owner.id)||0;
+      const visBadge=c.visibility==='public'?'<span class="badge ok">🌍 public</span>':c.visibility==='private'?'<span class="badge bad">🔒 private</span>':'<span class="badge info">🔗 unlisted</span>';
+      return `<tr>
+        <td><input type="checkbox" class="adm-coll-cb" data-id="${c.id}" onchange="adminToggleRow(${c.id},this.checked)"></td>
+        <td>${c.id}</td>
+        <td><a href="/c/${esc(c.slug)}" target="_blank" style="color:#a78bfa;font-weight:700">${c.emoji||'🎬'} ${esc(c.name)}</a><div style="font-size:.7rem;color:#94a3b8">${esc(c.slug||'')}</div></td>
+        <td><a href="/u/${ownId}" target="_blank" style="color:#a78bfa">${esc(own)}</a><div style="font-size:.7rem;color:#94a3b8">id ${ownId}</div></td>
+        <td><span class="badge">${c.items_count||0}</span></td>
+        <td>${c.likes_count||0}</td>
+        <td>${c.comments_count||0}</td>
+        <td>${c.views_count||0}</td>
+        <td>${c.collaborators_count||0}</td>
+        <td>${visBadge}</td>
+        <td style="white-space:nowrap;font-size:.78rem">${esc((c.created_at||'').slice(0,16).replace('T',' '))}</td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-sm" title="Відкрити" onclick="window.open('/c/${esc(c.slug)}','_blank')">🔗</button>
+          <button class="btn btn-sm" title="Редагувати" onclick="adminEditColl(${c.id})">✏️</button>
+          <button class="btn btn-sm" title="Тайтли" onclick="adminViewItems(${c.id})">🎬</button>
+          <button class="btn btn-sm" title="Учасники" onclick="adminViewCollab(${c.id})">👥</button>
+          <button class="btn btn-sm" title="Видимість" onclick="adminQuickVis(${c.id})">🔁</button>
+          <button class="btn btn-sm btn-danger" title="Видалити" onclick="adminDelColl(${c.id})">🗑</button>
+        </td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
+    _admCollPager();
+  }catch(e){toast('Помилка завантаження колекцій: '+e.message)}
+}
+function adminToggleAll(checked){
+  _admColl.selected.clear();
+  if(checked) _admColl.list.forEach(c => _admColl.selected.add(c.id));
+  document.querySelectorAll('.adm-coll-cb').forEach(cb => { cb.checked = checked; });
+  _admCollUpdateSelectedLabel();
+}
+function adminToggleRow(id, checked){
+  if(checked) _admColl.selected.add(id);
+  else _admColl.selected.delete(id);
+  _admCollUpdateSelectedLabel();
+}
+async function adminBulkSetVisibility(vis){
+  if(!_admColl.selected.size){ toast('Не вибрано жодної колекції'); return; }
+  if(!confirm(`Змінити видимість ${_admColl.selected.size} колекцій на «${vis}»?`)) return;
+  let ok=0,fail=0;
+  for(const id of _admColl.selected){
+    try{
+      const r=await fetch(API+'/api/admin/collections/'+id,{method:'PATCH',headers,body:JSON.stringify({visibility:vis})});
+      if(r.ok) ok++; else fail++;
+    }catch(_){ fail++; }
+  }
+  toast(`Готово · оновлено: ${ok}, помилок: ${fail}`);
+  loadAdminCollections(_admColl.offset);
+}
+async function adminBulkDelete(){
+  if(!_admColl.selected.size){ toast('Не вибрано жодної колекції'); return; }
+  if(!confirm(`УВАГА! Видалити ${_admColl.selected.size} колекцій назавжди? Дія незворотна.`)) return;
+  let ok=0,fail=0;
+  for(const id of _admColl.selected){
+    try{
+      const r=await fetch(API+'/api/admin/collections/'+id,{method:'DELETE',headers});
+      if(r.ok) ok++; else fail++;
+    }catch(_){ fail++; }
+  }
+  toast(`Готово · видалено: ${ok}, помилок: ${fail}`);
+  loadAdminCollections(_admColl.offset);
+}
+async function adminEditColl(id){
+  try{
+    const d=await jget('/api/admin/collections/'+id);
+    const c=d.collection||{};
+    const name=prompt('Назва колекції:',c.name||'');
+    if(name===null) return;
+    const emoji=prompt('Емодзі:',c.emoji||'🎬');
+    if(emoji===null) return;
+    const visibility=prompt('Видимість (public / unlisted / private):',c.visibility||'public');
+    if(visibility===null) return;
+    const description=prompt('Опис:',c.description||'')||'';
+    const r=await fetch(API+'/api/admin/collections/'+id,{method:'PATCH',headers,body:JSON.stringify({name,emoji,visibility,description})});
+    if(!r.ok)throw new Error(await r.text());
+    toast('Збережено');loadAdminCollections(_admColl.offset);
+  }catch(e){toast('Помилка: '+e.message)}
+}
+async function adminQuickVis(id){
+  const c = _admColl.list.find(x => x.id===id);
+  if(!c) return;
+  const next = c.visibility==='public' ? 'unlisted' : c.visibility==='unlisted' ? 'private' : 'public';
+  try{
+    const r=await fetch(API+'/api/admin/collections/'+id,{method:'PATCH',headers,body:JSON.stringify({visibility:next})});
+    if(!r.ok)throw new Error(await r.text());
+    toast(`Видимість: ${c.visibility} → ${next}`);
+    loadAdminCollections(_admColl.offset);
+  }catch(e){toast('Помилка: '+e.message)}
+}
+async function adminViewCollab(id){
+  try{
+    const d=await jget('/api/admin/collections/'+id);
+    const c=d.collection||{};
+    const collab=c.collaborators||[];
+    const items=c.items||[];
+    if(!collab.length){
+      alert(`«${c.name}» — учасників немає · ${items.length} тайтлів`);
+      return;
+    }
+    const lines=collab.map(u=>`${u.id}: ${u.username||u.email||'—'} — ${u.role}`).join('\n');
+    const ans=prompt(`Учасники колекції «${c.name}»:\n${lines}\n\nВведи ID учасника, щоб видалити (або залиш порожнім, щоб закрити):`);
+    if(!ans) return;
+    const uid=parseInt(ans,10);
+    if(!uid)return;
+    if(!confirm('Видалити учасника '+uid+' з колекції?'))return;
+    const r=await fetch(API+'/api/admin/collections/'+id+'/collaborators/'+uid,{method:'DELETE',headers});
+    if(!r.ok)throw new Error(await r.text());
+    toast('Учасника видалено');
+  }catch(e){toast('Помилка: '+e.message)}
+}
+async function adminViewItems(id){
+  try{
+    const d=await jget('/api/admin/collections/'+id);
+    const c=d.collection||{};
+    const items=c.items||[];
+    if(!items.length){ alert(`«${c.name}» — порожня колекція`); return; }
+    const titles = items.slice(0,40).map((it,i)=>`${i+1}. [${it.type||'?'}] ${it.title||'—'} (id ${it.id||'?'})`).join('\n');
+    const more = items.length > 40 ? `\n\n…і ще ${items.length - 40} тайтлів` : '';
+    alert(`«${c.name}» — ${items.length} тайтлів\n\n${titles}${more}`);
+  }catch(e){toast('Помилка: '+e.message)}
+}
+async function adminDelColl(id){
+  if(!confirm('Видалити колекцію #'+id+' назавжди? Це дія незворотна.'))return;
+  try{
+    const r=await fetch(API+'/api/admin/collections/'+id,{method:'DELETE',headers});
+    if(!r.ok)throw new Error(await r.text());
+    toast('Колекцію видалено');loadAdminCollections(_admColl.offset);
+  }catch(e){toast('Помилка: '+e.message)}
+}
+
+checkAdminAccess().then(ok=>{if(ok){loadStats();loadSettings();loadTopUsers();loadTopContent()}});
+
+// ─── BLOG ADMIN ───────────────────────────────────────────────────────────
+let _blogPage = 1;
+let _blogEditId = null;
+
+async function blogLoad(page = 1) {
+  _blogPage = page;
+  const q = (document.getElementById('blog-search').value || '').trim();
+  let url = `/api/admin/blog?page=${page}&per_page=15`;
+  if (q) url += `&search=${encodeURIComponent(q)}`;
+  try {
+    const d = await jget(url);
+    const posts = d.posts || [];
+    const total = d.total || 0;
+    const totalPages = d.total_pages || 1;
+    const tbody = document.getElementById('blog-tbody');
+    if (!posts.length) {
+      tbody.innerHTML = `<tr><td colspan="7" class="empty">Постів немає</td></tr>`;
+      document.getElementById('blog-pagination').innerHTML = '';
+      return;
+    }
+    tbody.innerHTML = posts.map(p => `
+      <tr>
+        <td style="max-width:220px;word-break:break-word">
+          <a href="/blog/${p.slug}" target="_blank" style="color:#a78bfa;text-decoration:none">${escAdm(p.title)}</a>
+        </td>
+        <td style="font-size:.75rem;color:rgba(255,255,255,.5)">${escAdm(p.tags || '—')}</td>
+        <td>${p.is_ai_generated ? '<span class="ai-badge">🤖 AI</span>' : '—'}</td>
+        <td>
+          <span class="pub-badge ${p.is_published ? 'pub-on' : 'pub-off'}" style="cursor:pointer" onclick="blogTogglePublish(${p.id},${p.is_published})">
+            ${p.is_published ? '✅ Опубл.' : '⏸ Чернетка'}
+          </span>
+        </td>
+        <td>${p.views || 0}</td>
+        <td style="font-size:.78rem;color:rgba(255,255,255,.5)">${blogFmtDate(p.created_at)}</td>
+        <td>
+          <div style="display:flex;gap:5px;flex-wrap:wrap">
+            <button class="btn" style="padding:4px 10px;font-size:.75rem" onclick="blogEdit(${p.id})">✏️</button>
+            <button class="btn btn-danger" style="padding:4px 10px;font-size:.75rem" onclick="blogDelete(${p.id},'${escAdm(p.title).replace(/'/g,"\\'")}')">🗑</button>
+          </div>
+        </td>
+      </tr>`).join('');
+    let pag = '';
+    if (totalPages > 1) {
+      if (page > 1) pag += `<button class="btn" onclick="blogLoad(${page-1})">←</button>`;
+      for (let i = Math.max(1,page-2); i <= Math.min(totalPages,page+2); i++) {
+        pag += `<button class="btn${i===page?' btn-primary':''}" onclick="blogLoad(${i})">${i}</button>`;
+      }
+      if (page < totalPages) pag += `<button class="btn" onclick="blogLoad(${page+1})">→</button>`;
+    }
+    document.getElementById('blog-pagination').innerHTML = pag;
+  } catch(e) { toast('Помилка завантаження: ' + e.message); }
+}
+
+let _blogEditSlug = null;
+
+function blogShowCreate() {
+  _blogEditId = null;
+  _blogEditSlug = null;
+  document.getElementById('blog-editor-title').textContent = 'Новий пост';
+  blogClearForm();
+  document.getElementById('blog-preview-btn').style.display = 'none';
+  document.getElementById('blog-copy-link-btn').style.display = 'none';
+  document.getElementById('blog-list-panel').style.display = 'none';
+  document.getElementById('blog-editor-panel').style.display = 'block';
+}
+
+async function blogEdit(id) {
+  try {
+    const d = await jget(`/api/admin/blog?page=1&per_page=200`);
+    const p = (d.posts || []).find(x => x.id == id);
+    if (!p) { toast('Пост не знайдено'); return; }
+    _blogEditId = p.id;
+    _blogEditSlug = p.slug || null;
+    document.getElementById('blog-editor-title').textContent = 'Редагування поста';
+    try {
+      const resF = await fetch(`${API}/api/blog/${p.slug}`, {headers});
+      const full = resF.ok ? await resF.json() : p;
+      blogFillForm(full);
+      if (full && full.slug) _blogEditSlug = full.slug;
+    } catch { blogFillForm(p); }
+    document.getElementById('blog-preview-btn').style.display = _blogEditSlug ? 'inline-flex' : 'none';
+    document.getElementById('blog-copy-link-btn').style.display = _blogEditSlug ? 'inline-flex' : 'none';
+    document.getElementById('blog-list-panel').style.display = 'none';
+    document.getElementById('blog-editor-panel').style.display = 'block';
+  } catch(e) { toast('Помилка: ' + e.message); }
+}
+
+function blogPreview() {
+  if (!_blogEditSlug) return;
+  window.open(`/blog/${_blogEditSlug}`, '_blank', 'noopener');
+}
+
+async function blogCopyLink() {
+  if (!_blogEditSlug) return;
+  const url = `${location.origin}/blog/${_blogEditSlug}`;
+  try {
+    await navigator.clipboard.writeText(url);
+    toast('Посилання скопійовано: ' + url);
+  } catch {
+    prompt('Копіювати:', url);
+  }
+}
+
+function blogFillForm(p) {
+  document.getElementById('blog-f-title').value = p.title || '';
+  document.getElementById('blog-f-cover').value = p.cover_image || '';
+  document.getElementById('blog-f-tags').value = p.tags || '';
+  document.getElementById('blog-f-excerpt').value = p.excerpt || '';
+  document.getElementById('blog-f-content').value = p.content || '';
+  document.getElementById('blog-f-published').checked = !!p.is_published;
+  document.getElementById('blog-f-ai').checked = !!p.is_ai_generated;
+  document.getElementById('blog-f-content-type').value = p.content_type || 'general';
+  document.getElementById('blog-f-meta-title').value = p.meta_title || '';
+  document.getElementById('blog-f-meta-desc').value = p.meta_description || '';
+  document.getElementById('blog-f-meta-kw').value = p.meta_keywords || '';
+  document.getElementById('blog-f-og-img').value = p.og_image || '';
+  blogCharCount('blog-f-meta-title','blog-mt-count',60);
+  blogCharCount('blog-f-meta-desc','blog-md-count',160);
+}
+
+function blogClearForm() {
+  ['blog-f-title','blog-f-cover','blog-f-tags','blog-f-excerpt','blog-f-content',
+   'blog-f-meta-title','blog-f-meta-desc','blog-f-meta-kw','blog-f-og-img','blog-ai-topic'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('blog-f-published').checked = false;
+  document.getElementById('blog-f-ai').checked = false;
+  document.getElementById('blog-f-content-type').value = 'general';
+  document.getElementById('blog-mt-count').textContent = '0/60';
+  document.getElementById('blog-md-count').textContent = '0/160';
+  document.getElementById('blog-ai-status').textContent = '';
+}
+
+function blogCancelEdit() {
+  document.getElementById('blog-editor-panel').style.display = 'none';
+  document.getElementById('blog-list-panel').style.display = 'block';
+  blogLoad(_blogPage);
+}
+
+async function blogSave() {
+  const title = document.getElementById('blog-f-title').value.trim();
+  if (!title) { toast('Введіть заголовок'); return; }
+  const content = document.getElementById('blog-f-content').value.trim();
+  if (!content) { toast('Введіть контент'); return; }
+  const body = {
+    title,
+    content,
+    excerpt: document.getElementById('blog-f-excerpt').value.trim() || null,
+    cover_image: document.getElementById('blog-f-cover').value.trim() || null,
+    tags: document.getElementById('blog-f-tags').value.trim(),
+    content_type: document.getElementById('blog-f-content-type').value || 'general',
+    is_published: document.getElementById('blog-f-published').checked ? 1 : 0,
+    is_ai_generated: document.getElementById('blog-f-ai').checked ? 1 : 0,
+    meta_title: document.getElementById('blog-f-meta-title').value.trim() || null,
+    meta_description: document.getElementById('blog-f-meta-desc').value.trim() || null,
+    meta_keywords: document.getElementById('blog-f-meta-kw').value.trim() || null,
+    og_image: document.getElementById('blog-f-og-img').value.trim() || null,
+  };
+  try {
+    const method = _blogEditId ? 'PUT' : 'POST';
+    const url = _blogEditId ? `${API}/api/admin/blog/${_blogEditId}` : `${API}/api/admin/blog`;
+    const res = await fetch(url, {method, headers, body: JSON.stringify(body)});
+    if (!res.ok) {
+      const msg = await blogResponseError(res, 'Помилка збереження');
+      throw new Error(msg);
+    }
+    toast(_blogEditId ? 'Пост оновлено' : 'Пост створено');
+    blogCancelEdit();
+  } catch(e) { toast('Помилка: ' + e.message); }
+}
+
+async function blogDelete(id, title) {
+  if (!confirm(`Видалити пост «${title}»? Цю дію не можна скасувати.`)) return;
+  try {
+    const res = await fetch(`${API}/api/admin/blog/${id}`, {method:'DELETE', headers});
+    if (!res.ok) throw new Error('Помилка');
+    toast('Пост видалено');
+    blogLoad(_blogPage);
+  } catch(e) { toast('Помилка: ' + e.message); }
+}
+
+async function blogTogglePublish(id, current) {
+  try {
+    const res = await fetch(`${API}/api/admin/blog/${id}`, {
+      method: 'PUT', headers,
+      body: JSON.stringify({is_published: current ? 0 : 1})
+    });
+    if (!res.ok) throw new Error('Помилка');
+    toast(current ? 'Знято з публікації' : 'Опубліковано');
+    blogLoad(_blogPage);
+  } catch(e) { toast('Помилка: ' + e.message); }
+}
+
+/**
+ * Pull a human-readable error reason out of a fetch Response without
+ * blowing up when the server returns text/html (older proxy 502 pages)
+ * or an empty body. Keeps the admin AI / SEO buttons from throwing
+ * "SyntaxError: Unexpected token" toasts.
+ */
+async function blogResponseError(res, fallback) {
+  try {
+    const ct = (res.headers.get('content-type') || '').toLowerCase();
+    if (ct.includes('application/json')) {
+      const j = await res.json();
+      return (j && (j.detail || j.error || j.message)) || `${fallback} (${res.status})`;
+    }
+    const txt = await res.text();
+    return txt ? (txt.length > 240 ? txt.slice(0,240)+'…' : txt) : `${fallback} (${res.status})`;
+  } catch {
+    return `${fallback} (${res.status})`;
+  }
+}
+
+async function blogGenerateAI() {
+  const topic = document.getElementById('blog-ai-topic').value.trim();
+  if (!topic) { toast('Введіть тему для генерації'); return; }
+  const status = document.getElementById('blog-ai-status');
+  status.textContent = '⏳ Генерація... це може зайняти 10–30 секунд';
+  const btn = document.querySelector('[onclick="blogGenerateAI()"]');
+  if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+  try {
+    const res = await fetch(`${API}/api/admin/blog/generate-ai`, {
+      method: 'POST', headers,
+      body: JSON.stringify({
+        topic,
+        language: document.getElementById('blog-ai-lang').value,
+        tone: document.getElementById('blog-ai-tone').value,
+      })
+    });
+    if (!res.ok) {
+      const msg = await blogResponseError(res, 'Помилка генерації');
+      throw new Error(msg);
+    }
+    const p = await res.json();
+    blogFillForm({...p, is_ai_generated: 1});
+    document.getElementById('blog-f-ai').checked = true;
+    status.textContent = '✅ Успішно згенеровано! Перевірте та відредагуйте за потребою.';
+    toast('Пост згенеровано через AI');
+  } catch(e) {
+    status.textContent = '❌ Помилка: ' + e.message;
+    toast('Помилка AI: ' + e.message);
+  } finally {
+    if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+  }
+}
+
+async function blogGenerateSEO() {
+  const title = document.getElementById('blog-f-title').value.trim();
+  const content = document.getElementById('blog-f-content').value.trim();
+  if (!title && !content) { toast('Спочатку введіть заголовок та контент'); return; }
+  toast('⏳ Генерую SEO...');
+  try {
+    const res = await fetch(`${API}/api/admin/blog/generate-seo`, {
+      method: 'POST', headers,
+      body: JSON.stringify({
+        title,
+        content,
+        excerpt: document.getElementById('blog-f-excerpt').value.trim(),
+      })
+    });
+    if (!res.ok) {
+      const msg = await blogResponseError(res, 'Помилка SEO');
+      throw new Error(msg);
+    }
+    const s = await res.json();
+    if (s.meta_title) document.getElementById('blog-f-meta-title').value = s.meta_title;
+    if (s.meta_description) document.getElementById('blog-f-meta-desc').value = s.meta_description;
+    if (s.meta_keywords) document.getElementById('blog-f-meta-kw').value = s.meta_keywords;
+    if (s.suggested_tags && !document.getElementById('blog-f-tags').value.trim()) {
+      document.getElementById('blog-f-tags').value = s.suggested_tags;
+    }
+    blogCharCount('blog-f-meta-title','blog-mt-count',60);
+    blogCharCount('blog-f-meta-desc','blog-md-count',160);
+    toast('SEO згенеровано');
+  } catch(e) { toast('Помилка SEO: ' + e.message); }
+}
+
+function blogCharCount(inputId, countId, max) {
+  const el = document.getElementById(inputId);
+  const ct = document.getElementById(countId);
+  if (!el || !ct) return;
+  const len = el.value.length;
+  ct.textContent = `${len}/${max}`;
+  ct.style.color = len > max * 0.9 ? '#f59e0b' : 'rgba(255,255,255,.35)';
+}
+
+function blogFmtDate(d) {
+  if (!d) return '—';
+  try { return new Date(d).toLocaleDateString('uk-UA', {day:'numeric',month:'short',year:'numeric'}); }
+  catch { return String(d).slice(0,10); }
+}
+
+function escAdm(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.querySelector('[data-tab="blog"]')?.addEventListener('click', () => blogLoad(1));
+
+</script>
+</body>
+</html>

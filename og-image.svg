@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#060614"/>
+      <stop offset="100%" style="stop-color:#0f0f2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="40%" style="stop-color:#a855f7"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative blobs -->
+  <circle cx="200" cy="150" r="200" fill="#8b5cf6" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1000" cy="480" r="250" fill="#ec4899" opacity="0.06" filter="url(#glow)"/>
+  <circle cx="600" cy="600" r="180" fill="#06d6a0" opacity="0.04" filter="url(#glow)"/>
+
+  <!-- Emoji icon -->
+  <text x="600" y="200" text-anchor="middle" font-size="100" fill="#ffffff">🎬</text>
+
+  <!-- Logo -->
+  <text x="600" y="310" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="72" font-weight="800" fill="#f0f0f8">
+    Pic<tspan fill="url(#accent)">ksy</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="380" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="28" fill="#a0a0c0" font-weight="600">
+    Підбери фільм, серіал або книгу
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="430" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="20" fill="#6b7280">
+    AI-рекомендації за настроєм за 5 секунд
+  </text>
+
+  <!-- Bottom bar -->
+  <rect x="400" y="490" width="400" height="4" rx="2" fill="url(#accent)" opacity="0.6"/>
+
+  <!-- URL -->
+  <text x="600" y="540" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="18" fill="#8b5cf6" font-weight="600">
+    picksy.my
+  </text>
+
+  <!-- Category pills -->
+  <rect x="340" y="560" width="100" height="30" rx="15" fill="#8b5cf6" opacity="0.15"/>
+  <text x="390" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#a78bfa" font-weight="600">🎬 Фільми</text>
+
+  <rect x="460" y="560" width="100" height="30" rx="15" fill="#ec4899" opacity="0.15"/>
+  <text x="510" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#f472b6" font-weight="600">📺 Серіали</text>
+
+  <rect x="580" y="560" width="100" height="30" rx="15" fill="#06d6a0" opacity="0.15"/>
+  <text x="630" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#34d399" font-weight="600">📚 Книги</text>
+
+  <rect x="700" y="560" width="100" height="30" rx="15" fill="#3b82f6" opacity="0.15"/>
+  <text x="750" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#60a5fa" font-weight="600">🤖 AI</text>
+</svg>

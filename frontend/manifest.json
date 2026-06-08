@@ -1,0 +1,100 @@
+{
+  "name": "Picksy — AI підбір фільмів, серіалів та книг",
+  "short_name": "Picksy",
+  "description": "AI-застосунок для підбору та відстеження фільмів, серіалів і книг.",
+  "id": "picksy.my",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "background_color": "#070b12",
+  "theme_color": "#070b12",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "lifestyle", "books"],
+  "lang": "uk",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Picksy — головна"
+    },
+    {
+      "src": "/og/quiz.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Picksy — квізи"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pick a Movie",
+      "short_name": "Movie",
+      "description": "AI-підбір фільму",
+      "url": "/?tab=movies",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Pick a TV Show",
+      "short_name": "TV",
+      "description": "AI-підбір серіалу",
+      "url": "/?tab=tv",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Pick a Book",
+      "short_name": "Book",
+      "description": "AI-підбір книги",
+      "url": "/?tab=books",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Квізи",
+      "short_name": "Квізи",
+      "description": "Відкрити квізи Picksy",
+      "url": "/quizzes",
+      "icons": [{ "src": "/og/quiz.png", "sizes": "1200x630" }]
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "prefer_related_applications": false,
+  "related_applications": []
+}

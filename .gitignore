@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build/cache output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+frontend/dist/
+qa-screens/
+
+# Tooling caches
+.claude/
+.claude.local/
+.playwright-mcp/
+
+# Environment/secrets
+.env
+.env.*
+!.env.example
+env/.env
+*.env
+!*.env.example
+
+# Backups
+*.bak
+*.backup
+*-backup.*
+*.backup-*
+backend/main.py.bak
+
+# Local database and archives
+*.sql
+*.zip
+*.rar
+*.7z
+backup.sql
+pickforme_backup.sql
+
+# Editor/system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local debug screenshots in repo root (not the OG branding image)
+/collections.png
+/home-*.png
+/quizzes.png
+/saved.png

@@ -1,0 +1,50 @@
+{
+  "name": "picksy-frontend",
+  "version": "1.0.0",
+  "description": "Picksy is an AI-powered tracker and recommendation app for movies, series, and books.",
+  "homepage": "https://picksy.my/",
+  "bugs": {
+    "url": "https://t.me/PicksySupportBot"
+  },
+  "author": {
+    "name": "Vadym Mosoruk",
+    "url": "https://t.me/vadimm_ppl"
+  },
+  "contributors": [
+    {
+      "name": "Mykola Drysliuk",
+      "url": "https://t.me/nightvisionnnnnn",
+      "role": "SMM & TikTok Marketing"
+    },
+    {
+      "name": "Kyrylo Kermoshchuk",
+      "url": "https://t.me/pushok1232",
+      "role": "SMM & Advertising"
+    }
+  ],
+  "license": "ISC",
+  "keywords": [
+    "picksy",
+    "picksy.my",
+    "ai movie recommendations",
+    "ai movie picker",
+    "movie recommendation engine",
+    "tv show picker",
+    "book recommendation",
+    "what to watch",
+    "mood based movie picker",
+    "ukrainian ai",
+    "vadym mosoruk"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "minify": "mkdir -p dist/js dist/css && npx esbuild css/style.css --minify --outfile=dist/css/style.min.css && for f in js/*.js; do npx esbuild \"$f\" --minify --outfile=\"dist/$f\"; done",
+    "prod": "npm run build && npm run minify"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "typescript": "^5.9.3"
+  }
+}

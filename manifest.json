@@ -1,0 +1,88 @@
+{
+    "name": "Picksy — AI підбір фільмів, серіалів та книг",
+    "short_name": "Picksy",
+    "description": "Безкоштовний AI-сервіс підбору фільмів, серіалів і книг за настроєм. Розробив Вадим Мосорук (Vadym Mosoruk).",
+    "id": "picksy.my",
+    "start_url": "/?utm_source=pwa",
+    "scope": "/",
+    "display": "standalone",
+    "display_override": ["standalone", "minimal-ui", "browser"],
+    "background_color": "#0a0a14",
+    "theme_color": "#0a0a14",
+    "orientation": "portrait-primary",
+    "categories": ["entertainment", "lifestyle", "books"],
+    "lang": "uk",
+    "dir": "ltr",
+    "iarc_rating_id": "",
+    "icons": [
+        {
+            "src": "/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Picksy — AI підбір фільмів"
+        },
+        {
+            "src": "/og/quiz.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Picksy quiz — кіноархетипи"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Pick a Movie",
+            "short_name": "Movie",
+            "description": "AI-підбір фільму",
+            "url": "/?tab=movies",
+            "icons": [{"src": "/og-image.png", "sizes": "1200x630"}]
+        },
+        {
+            "name": "Pick a TV Show",
+            "short_name": "TV",
+            "description": "AI-підбір серіалу",
+            "url": "/?tab=tv",
+            "icons": [{"src": "/og-image.png", "sizes": "1200x630"}]
+        },
+        {
+            "name": "Pick a Book",
+            "short_name": "Book",
+            "description": "AI-підбір книги",
+            "url": "/?tab=books",
+            "icons": [{"src": "/og-image.png", "sizes": "1200x630"}]
+        },
+        {
+            "name": "Quiz: Який ти кіноархетип",
+            "short_name": "Quiz",
+            "description": "Кіно-квіз із 16 архетипами",
+            "url": "/quiz",
+            "icons": [{"src": "/og/quiz.png", "sizes": "1200x630"}]
+        }
+    ],
+    "share_target": {
+        "action": "/",
+        "method": "GET",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    },
+    "prefer_related_applications": false,
+    "related_applications": []
+}

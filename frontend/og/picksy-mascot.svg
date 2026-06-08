@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Picksy mascot — AI movie curator film reel character">
+  <title>Picksy — AI movie curator mascot</title>
+  <desc>Round film-reel character with eyes and a friendly smile. Picksy is the AI curator that picks movies, TV series and books for you.</desc>
+  <defs>
+    <radialGradient id="body" cx="50%" cy="40%" r="62%">
+      <stop offset="0%" stop-color="#c4a8ff"/>
+      <stop offset="55%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </radialGradient>
+    <radialGradient id="rim" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="100%" stop-color="rgba(236,72,153,.7)"/>
+    </radialGradient>
+    <linearGradient id="cheek" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity=".15"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="84" fill="url(#body)"/>
+  <circle cx="100" cy="100" r="84" fill="url(#rim)" opacity=".7"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+  <g fill="rgba(255,255,255,.18)">
+    <rect x="169" y="98" width="6" height="4" rx="1"/>
+    <rect x="161.7" y="135" width="6" height="4" rx="1"/>
+    <rect x="133" y="161" width="6" height="4" rx="1"/>
+    <rect x="97" y="169" width="6" height="4" rx="1"/>
+    <rect x="61" y="161" width="6" height="4" rx="1"/>
+    <rect x="32.3" y="135" width="6" height="4" rx="1"/>
+    <rect x="25" y="98" width="6" height="4" rx="1"/>
+    <rect x="32.3" y="61" width="6" height="4" rx="1"/>
+    <rect x="61" y="35" width="6" height="4" rx="1"/>
+    <rect x="97" y="27" width="6" height="4" rx="1"/>
+    <rect x="133" y="35" width="6" height="4" rx="1"/>
+    <rect x="161.7" y="61" width="6" height="4" rx="1"/>
+  </g>
+  <circle cx="100" cy="100" r="50" fill="rgba(26,16,51,.85)" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+  <circle cx="100" cy="100" r="10" fill="#1a0d3d" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+  <ellipse cx="58" cy="120" rx="14" ry="8" fill="url(#cheek)"/>
+  <ellipse cx="142" cy="120" rx="14" ry="8" fill="url(#cheek)"/>
+  <rect x="60" y="76" width="22" height="5" rx="2.5" fill="#0a0a14"/>
+  <rect x="118" y="76" width="22" height="5" rx="2.5" fill="#0a0a14"/>
+  <g transform="translate(70 100)">
+    <ellipse cx="0" cy="0" rx="11" ry="13" fill="#fff"/>
+    <circle cx="0" cy="2" r="7" fill="#0a0a14"/>
+    <circle cx="2" cy="-2" r="2.4" fill="#fff"/>
+  </g>
+  <g transform="translate(130 100)">
+    <ellipse cx="0" cy="0" rx="11" ry="13" fill="#fff"/>
+    <circle cx="0" cy="2" r="7" fill="#0a0a14"/>
+    <circle cx="2" cy="-2" r="2.4" fill="#fff"/>
+  </g>
+  <path d="M 82 130 Q 100 148 118 130" fill="none" stroke="#0a0a14" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 158 56 L 162 64 L 170 68 L 162 72 L 158 80 L 154 72 L 146 68 L 154 64 Z" fill="#fbbf24" opacity=".85"/>
+</svg>

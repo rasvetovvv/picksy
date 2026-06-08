@@ -1,0 +1,102 @@
+/* Mini profile */
+.profile-modal-content {
+    width: min(92vw, 440px);
+    padding: 24px;
+}
+
+.profile-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.profile-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    background: var(--gradient-main, linear-gradient(135deg, #8b5cf6, #ec4899));
+    box-shadow: 0 10px 30px var(--accent-glow, rgba(139, 92, 246, 0.28));
+}
+
+.profile-title {
+    font-size: 1.35rem;
+    font-weight: 900;
+    margin: 0;
+}
+
+.profile-email {
+    color: var(--text-dim, rgba(255,255,255,0.65));
+    font-size: 0.9rem;
+    margin-top: 4px;
+    word-break: break-all;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.profile-stat {
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.055);
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.12));
+    text-align: center;
+}
+
+.profile-stat-icon {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.profile-stat b {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.profile-stat small {
+    color: var(--text-dim, rgba(255,255,255,0.65));
+    font-size: 0.78rem;
+}
+
+.profile-saved-line {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.04);
+    color: var(--text-dim, rgba(255,255,255,0.65));
+    text-align: center;
+}
+
+.profile-saved-line b {
+    color: var(--text, #fff);
+}
+
+.profile-saved-line span {
+    margin: 0 8px;
+    color: var(--text-muted, rgba(255,255,255,0.45));
+}
+
+.profile-logout-btn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ef4444, #ec4899);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(239, 68, 68, 0.25);
+}
+
+.profile-logout-btn:hover {
+    transform: translateY(-1px);
+}

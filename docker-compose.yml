@@ -1,0 +1,58 @@
+services:
+  app:
+    build: .
+    ports:
+      - "7888:7888"
+    env_file:
+      - .env
+    environment:
+      - MYSQL_HOST=db
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      # Mount source code directly; changes apply without rebuilding the image.
+      # frontend/ and backend/ on the host override what was baked into the image.
+      - ./frontend:/app/frontend
+      - ./backend:/app/backend
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    env_file:
+      - .env
+    environment:
+      - MYSQL_HOST=db
+      - PICKSY_API_URL=http://app:7888
+      - PYTHONDONTWRITEBYTECODE=1
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_started
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass123}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-pickforme}
+      MYSQL_USER: ${MYSQL_USER:-pickforme}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-pickforme_pass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpass123}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

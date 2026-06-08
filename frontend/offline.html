@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Picksy — Офлайн</title>
+<meta name="description" content="Picksy працює офлайн — як тільки інтернет повернеться, ми продовжимо підбирати фільми за твоїм настроєм.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0a1a">
+<link rel="icon" href="/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:Inter,system-ui,-apple-system, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji",sans-serif;
+  color:#f5f5ff;
+  background:radial-gradient(ellipse at top,#1a0d3d 0%,#0a0a1a 60%,#04040c 100%);
+  min-height:100vh;
+  overflow-x:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  position:relative;
+}
+/* animated stars background */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.5) 50%,transparent),
+    radial-gradient(1px 1px at 60% 70%,rgba(167,139,250,.7) 50%,transparent),
+    radial-gradient(1.5px 1.5px at 40% 50%,rgba(255,255,255,.4) 50%,transparent),
+    radial-gradient(1px 1px at 80% 20%,rgba(236,72,153,.6) 50%,transparent),
+    radial-gradient(2px 2px at 90% 60%,rgba(255,255,255,.5) 50%,transparent),
+    radial-gradient(1px 1px at 30% 80%,rgba(167,139,250,.6) 50%,transparent),
+    radial-gradient(1.5px 1.5px at 70% 90%,rgba(255,255,255,.5) 50%,transparent),
+    radial-gradient(1px 1px at 15% 60%,rgba(236,72,153,.4) 50%,transparent);
+  background-size:600px 400px;
+  animation:drift 90s linear infinite;
+  pointer-events:none;
+  opacity:.6;
+  z-index:0;
+}
+@keyframes drift{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-200px,-100px)}
+}
+/* glowing orbs */
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:.4;
+  pointer-events:none;
+  z-index:0;
+  animation:float 14s ease-in-out infinite;
+}
+.orb-1{width:300px;height:300px;background:#8b5cf6;top:10%;left:-100px;animation-delay:0s}
+.orb-2{width:260px;height:260px;background:#ec4899;bottom:10%;right:-80px;animation-delay:5s}
+.orb-3{width:200px;height:200px;background:#3b82f6;top:50%;left:60%;animation-delay:9s}
+@keyframes float{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-30px) scale(1.05)}
+}
+.wrap{
+  position:relative;z-index:1;
+  text-align:center;
+  max-width:520px;width:100%;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:28px;
+  padding:46px 32px 38px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07);
+  animation:fadeUp .7s cubic-bezier(.2,.7,.2,1.05) both;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.icon-wrap{
+  width:120px;height:120px;
+  margin:0 auto 28px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(236,72,153,.15));
+  border:2px solid rgba(255,255,255,.08);
+  position:relative;
+  animation:pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(139,92,246,.5)}
+  50%{transform:scale(1.04);box-shadow:0 0 0 18px rgba(139,92,246,0)}
+}
+.icon-wrap svg{width:62px;height:62px;color:#a78bfa}
+.icon-wrap::after{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0deg,#8b5cf6 90deg,transparent 180deg,#ec4899 270deg,transparent 360deg);
+  opacity:.3;
+  filter:blur(12px);
+  z-index:-1;
+  animation:rotate 8s linear infinite;
+}
+@keyframes rotate{to{transform:rotate(360deg)}}
+h1{
+  font-size:clamp(1.6rem,5vw,2.2rem);
+  font-weight:900;
+  letter-spacing:-.02em;
+  background:linear-gradient(135deg,#fff 0%,#a78bfa 70%,#ec4899 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;color:transparent;
+  margin-bottom:14px;
+  line-height:1.1;
+}
+.subtitle{
+  color:rgba(255,255,255,.7);
+  font-size:1rem;
+  line-height:1.5;
+  margin-bottom:30px;
+  font-weight:500;
+}
+.actions{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:30px;
+}
+.btn{
+  font-family:inherit;
+  border:0;
+  cursor:pointer;
+  padding:13px 24px;
+  border-radius:14px;
+  font-weight:700;
+  font-size:.92rem;
+  letter-spacing:.01em;
+  text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .25s cubic-bezier(.2,.7,.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#8b5cf6,#ec4899);
+  color:#fff;
+  box-shadow:0 6px 20px rgba(139,92,246,.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(139,92,246,.55)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary.loading{pointer-events:none;opacity:.7}
+.btn-primary.loading svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-secondary{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+}
+.btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(167,139,250,.5)}
+.status{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;
+  background:rgba(239,68,68,.12);
+  border:1px solid rgba(239,68,68,.3);
+  border-radius:99px;
+  color:#fca5a5;
+  font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  margin-bottom:22px;
+}
+.status.online{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.status .dot{
+  width:8px;height:8px;border-radius:50%;background:currentColor;
+  animation:blink 1.4s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.tips{
+  text-align:left;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  padding:18px 20px;
+  margin-top:14px;
+}
+.tips-title{
+  font-weight:800;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  color:#a78bfa;margin-bottom:10px;
+}
+.tips ul{list-style:none}
+.tips li{
+  font-size:.86rem;color:rgba(255,255,255,.75);
+  padding:6px 0;display:flex;align-items:flex-start;gap:8px;
+}
+.tips li::before{content:'›';color:#a78bfa;font-weight:900;flex-shrink:0;margin-top:-1px}
+.cached-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.cached-row a{color:#cbd5e1;text-decoration:none;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:.78rem;font-weight:700;transition:all .2s}
+.cached-row a:hover{color:#fff;background:rgba(139,92,246,.15);border-color:rgba(167,139,250,.4)}
+.lang-switch{
+  position:absolute;top:14px;right:14px;
+  display:flex;gap:4px;
+  background:rgba(0,0,0,.3);
+  border-radius:99px;padding:3px;
+  border:1px solid rgba(255,255,255,.07);
+}
+.lang-btn{
+  font-family:inherit;
+  background:transparent;color:rgba(255,255,255,.55);
+  border:0;cursor:pointer;
+  padding:5px 11px;border-radius:99px;
+  font-size:.72rem;font-weight:700;
+  transition:all .2s;
+}
+.lang-btn:hover{color:#fff}
+.lang-btn.active{background:rgba(139,92,246,.3);color:#fff}
+.brand{
+  position:absolute;top:18px;left:20px;
+  font-weight:900;font-size:1rem;letter-spacing:-.01em;
+  background:linear-gradient(135deg,#a78bfa,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;color:transparent;
+  text-decoration:none;
+  z-index:2;
+}
+@media(max-width:520px){
+  .wrap{padding:38px 20px 28px;border-radius:22px}
+  .icon-wrap{width:96px;height:96px;margin-bottom:22px}
+  .icon-wrap svg{width:48px;height:48px}
+  h1{font-size:1.5rem}
+  .subtitle{font-size:.92rem;margin-bottom:24px}
+  .lang-switch{top:10px;right:10px}
+  .brand{top:14px;left:14px;font-size:.92rem}
+}
+@media(prefers-reduced-motion:reduce){
+  body::before,.orb,.icon-wrap,.icon-wrap::after,.status .dot,.btn-primary.loading svg{animation:none!important}
+}
+</style>
+<link rel="stylesheet" href="/css/mascot.css?v=picksy-162">
+<style>
+.picksy-offline-wrap{margin:0 auto 18px;display:flex;justify-content:center;animation:fadeUp .7s cubic-bezier(.2,.7,.2,1.05) both}
+.picksy-offline-wrap .picksy-figure{width:140px!important;height:140px!important;filter:drop-shadow(0 18px 30px rgba(139,92,246,.32))}
+@media(max-width:520px){.picksy-offline-wrap .picksy-figure{width:110px!important;height:110px!important}}
+@media(prefers-reduced-motion:reduce){.picksy-offline-wrap{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<a class="brand" href="/">Picksy</a>
+<div class="lang-switch">
+  <button class="lang-btn" data-lang="uk" type="button">UK</button>
+  <button class="lang-btn" data-lang="en" type="button">EN</button>
+</div>
+<div class="wrap">
+  <div class="status" id="status">
+    <span class="dot"></span>
+    <span data-i18n="statusOffline">Немає інтернету</span>
+  </div>
+  <div class="icon-wrap" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+      <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+      <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+      <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+      <line x1="12" y1="20" x2="12.01" y2="20"/>
+    </svg>
+  </div>
+  <!-- Picksy mascot sits between the broken-WiFi icon and the headline so
+       the offline page doesn't feel like a dead end. Filled in by mascot.js
+       once it loads (the SVG is cached in the service worker). -->
+  <div class="picksy-offline-wrap" aria-hidden="true">
+    <div class="picksy-mascot" data-size="md" data-mood="tired" id="picksy-offline" role="img" aria-label="Picksy чекає, поки повернеться інтернет"></div>
+  </div>
+  <h1 data-i18n="offlineTitle">Ти зараз офлайн</h1>
+  <p class="subtitle" data-i18n="offlineDesc">
+    Не вдалось підключитись до сервера. Перевір з'єднання — Picksy повернеться, як тільки інтернет з'явиться знову.
+  </p>
+  <div class="actions">
+    <button class="btn btn-primary" id="retry-btn" type="button">
+      <svg id="retry-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 4v6h-6"/>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+      </svg>
+      <span data-i18n="retry">Спробувати знову</span>
+    </button>
+    <a class="btn btn-secondary" href="/" data-i18n="goHome">На головну</a>
+  </div>
+  <div class="tips">
+    <div class="tips-title" data-i18n="tipsTitle">Поки чекаєш…</div>
+    <ul>
+      <li data-i18n="tip1">Перевір Wi-Fi або мобільну мережу</li>
+      <li data-i18n="tip2">Перезавантаж роутер</li>
+      <li data-i18n="tip3">Картки колекцій можуть бути доступні з кешу</li>
+    </ul>
+    <div class="cached-row" id="cached-row">
+      <a href="/" data-i18n="openHome">Головна</a>
+      <a href="/quiz" data-i18n="openQuiz">Квіз</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var STR = {
+    uk: {
+      statusOffline:'Немає інтернету', statusOnline:'Знову онлайн!',
+      offlineTitle:'Ти зараз офлайн',
+      offlineDesc:"Не вдалось підключитись до сервера. Перевір з'єднання — Picksy повернеться, як тільки інтернет з'явиться знову.",
+      retry:'Спробувати знову', retrying:'Перевіряю…',
+      goHome:'На головну',
+      tipsTitle:'Поки чекаєш…',
+      tip1:'Перевір Wi-Fi або мобільну мережу',
+      tip2:'Перезавантаж роутер',
+      tip3:'Картки колекцій можуть бути доступні з кешу',
+      openHome:'Головна', openQuiz:'Квіз'
+    },
+    en: {
+      statusOffline:'No internet', statusOnline:'Back online!',
+      offlineTitle:"You're offline",
+      offlineDesc:"Couldn't reach our servers. Check your connection — Picksy will come back as soon as the internet returns.",
+      retry:'Try again', retrying:'Checking…',
+      goHome:'Go home',
+      tipsTitle:'While you wait…',
+      tip1:'Check your Wi-Fi or mobile network',
+      tip2:'Reboot your router',
+      tip3:'Cached collections might still be available',
+      openHome:'Home', openQuiz:'Quiz'
+    }
+  };
+  var lang = (function(){
+    try {
+      var p = new URLSearchParams(location.search).get('lang');
+      if (p === 'uk' || p === 'en') return p;
+      var ls = localStorage.getItem('pfm_lang') || localStorage.getItem('picksy_faq_lang');
+      if (ls === 'uk' || ls === 'en') return ls;
+      var nav = (navigator.language || 'uk').slice(0,2).toLowerCase();
+      return nav === 'uk' || nav === 'ru' ? 'uk' : 'en';
+    } catch(e) { return 'uk'; }
+  })();
+  function applyI18n(){
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (STR[lang] && STR[lang][k]) el.textContent = STR[lang][k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+  }
+  function setLang(l){
+    lang = l;
+    try { localStorage.setItem('pfm_lang', l); localStorage.setItem('picksy_faq_lang', l); } catch(e){}
+    applyI18n();
+  }
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+  applyI18n();
+  // Retry button
+  var btn = document.getElementById('retry-btn');
+  var statusEl = document.getElementById('status');
+  function setStatusOnline(){
+    if (!statusEl) return;
+    statusEl.classList.add('online');
+    statusEl.querySelector('[data-i18n]').textContent = STR[lang].statusOnline;
+  }
+  function setStatusOffline(){
+    if (!statusEl) return;
+    statusEl.classList.remove('online');
+    statusEl.querySelector('[data-i18n]').textContent = STR[lang].statusOffline;
+  }
+  // The retry button reloads the original requested page (when known) so users
+  // land back where they were after the network returns, instead of always
+  // bouncing to the homepage.
+  function originalTarget(){
+    try {
+      var p = new URLSearchParams(location.search).get('from');
+      if (p && p.charAt(0) === '/') return p;
+    } catch(e) {}
+    try {
+      if (document.referrer) {
+        var u = new URL(document.referrer);
+        if (u.origin === location.origin && u.pathname && u.pathname !== '/offline.html') {
+          return u.pathname + (u.search || '');
+        }
+      }
+    } catch(e) {}
+    return '/';
+  }
+  btn.addEventListener('click', function(){
+    btn.classList.add('loading');
+    btn.querySelector('span').textContent = STR[lang].retrying;
+    fetch('/api/health', { cache:'no-store' })
+      .then(function(r){
+        if (r && r.ok) {
+          setStatusOnline();
+          setTimeout(function(){ location.href = originalTarget(); }, 600);
+        } else {
+          throw new Error('still offline');
+        }
+      })
+      .catch(function(){
+        setTimeout(function(){
+          btn.classList.remove('loading');
+          btn.querySelector('span').textContent = STR[lang].retry;
+        }, 700);
+      });
+  });
+  // React to network status
+  window.addEventListener('online', function(){
+    setStatusOnline();
+    setTimeout(function(){ location.href = originalTarget(); }, 600);
+  });
+  window.addEventListener('offline', setStatusOffline);
+  if (navigator.onLine) {
+    // Sometimes the SW serves this page even when navigator says online; double-check
+    fetch('/api/health', { cache:'no-store' }).then(function(r){
+      if (r && r.ok) { setStatusOnline(); setTimeout(function(){ location.href=originalTarget(); }, 800); }
+    }).catch(function(){});
+  }
+})();
+</script>
+<script src="/js/mascot.js?v=picksy-162"></script>
+<script>
+(function(){
+  // Fill in the Picksy reel mascot once mascot.js has loaded. Without
+  // this the wrapper is just an empty <div>; mascot.js doesn't auto-mount
+  // here because offline.html isn't a known target page.
+  function mountOfflinePicksy(){
+    var host=document.getElementById('picksy-offline');
+    if(!host||!window.Picksy)return;
+    var label=(document.documentElement.lang==='en')
+      ?"Picksy waits for the internet to return"
+      :"Picksy чекає, поки повернеться інтернет";
+    host.innerHTML='<div class="picksy-figure">'+window.Picksy.svg({label:label})+'</div>';
+    // Cycle moods so he doesn't look frozen.
+    var moods=['tired','sad','tired','thinking','sad'];
+    setInterval(function(){host.setAttribute('data-mood',moods[Math.floor(Math.random()*moods.length)]);},4200);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mountOfflinePicksy);else mountOfflinePicksy();
+})();
+</script>
+</body>
+</html>

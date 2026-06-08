@@ -1,0 +1,511 @@
+/* ============================================================
+   Picksy Mascot — кінокотушка з характером
+   AI-куратор Picksy: круглий кіно-ролик з очима, бровами,
+   маленьким ротом та "ніжкою-стрічкою". Емоції міняються через
+   data-mood, ім'я та фраза — через .picksy-bubble.
+   ============================================================ */
+
+:root {
+  --picksy-purple: #a78bfa;
+  --picksy-pink:   #ec4899;
+  --picksy-gold:   #fbbf24;
+  --picksy-dark:   #1a1033;
+  --picksy-eye:    #0a0a14;
+  --picksy-shine:  rgba(255,255,255,.95);
+}
+
+/* Wrapper used wherever the mascot appears */
+.picksy-mascot {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The reel itself — sized via .picksy-mascot[data-size] */
+.picksy-figure {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform-origin: center bottom;
+  animation: picksy-bob 4.8s ease-in-out infinite;
+  filter: drop-shadow(0 18px 40px rgba(139,92,246,.45));
+  transition: transform .25s cubic-bezier(.2,.7,.2,1.4);
+}
+.picksy-mascot[data-size="sm"] .picksy-figure { width: 86px;  height: 86px; }
+.picksy-mascot[data-size="md"] .picksy-figure { width: 130px; height: 130px; }
+.picksy-mascot[data-size="lg"] .picksy-figure { width: 200px; height: 200px; }
+.picksy-mascot[data-size="xl"] .picksy-figure { width: 240px; height: 240px; }
+
+.picksy-figure:hover { transform: scale(1.06) rotate(-2deg); }
+.picksy-figure:active { transform: scale(.96); }
+.picksy-figure svg { width: 100%; height: 100%; overflow: visible; display: block; }
+
+@keyframes picksy-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-6px) rotate(2deg); }
+}
+
+/* Halo / glow behind the mascot */
+.picksy-figure::before {
+  content: '';
+  position: absolute;
+  inset: -8% -8% -4%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(139,92,246,.35) 90deg,
+    transparent 180deg,
+    rgba(236,72,153,.35) 270deg,
+    transparent 360deg);
+  filter: blur(18px);
+  opacity: .7;
+  z-index: -1;
+  animation: picksy-halo 9s linear infinite;
+}
+@keyframes picksy-halo { to { transform: rotate(360deg); } }
+
+/* ------------------------------------------------------------
+   Speech bubble — what Picksy "says"
+   ------------------------------------------------------------ */
+.picksy-bubble {
+  position: relative;
+  max-width: 340px;
+  padding: 12px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  border: 1px solid rgba(167,139,250,.35);
+  color: #f5f5ff;
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  animation: picksy-bubble-in .5s cubic-bezier(.2,.7,.2,1.05) both;
+}
+.picksy-bubble::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+  border-top: 1px solid rgba(167,139,250,.35);
+  border-left: 1px solid rgba(167,139,250,.35);
+}
+.picksy-bubble small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--picksy-purple), var(--picksy-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes picksy-bubble-in {
+  from { opacity: 0; transform: translateY(8px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0)  scale(1); }
+}
+
+/* "Tap to chat" hint */
+.picksy-hint {
+  font-size: .7rem;
+  color: rgba(245,245,255,.5);
+  letter-spacing: .4px;
+  margin-top: -4px;
+}
+
+/* ------------------------------------------------------------
+   Eyes & mouth — moods
+   ------------------------------------------------------------ */
+/* The styled .picksy-eye is now an inner <g> wrapping the white,
+   pupil and shine. Using transform-box: fill-box pins the
+   transform-origin to the eye's own bbox so blink / mood scaling no
+   longer drifts the eye off into the SVG corner. */
+.picksy-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: picksy-blink 5.5s ease-in-out infinite;
+}
+.picksy-pupil {
+  fill: var(--picksy-eye);
+}
+.picksy-eye-shine {
+  fill: var(--picksy-shine);
+  pointer-events: none;
+}
+@keyframes picksy-blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  96%           { transform: scaleY(.08); }
+}
+
+.picksy-mouth {
+  fill: none;
+  stroke: var(--picksy-eye);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.picksy-brow {
+  fill: var(--picksy-eye);
+  transform-origin: center;
+  transition: transform .4s ease;
+}
+
+/* Mood: happy (default) */
+.picksy-mascot[data-mood="happy"] .picksy-mouth-happy   { opacity: 1; }
+.picksy-mascot[data-mood="happy"] .picksy-mouth-sad,
+.picksy-mascot[data-mood="happy"] .picksy-mouth-think,
+.picksy-mascot[data-mood="happy"] .picksy-mouth-shocked,
+.picksy-mascot[data-mood="happy"] .picksy-mouth-tired,
+.picksy-mascot[data-mood="happy"] .picksy-mouth-wink,
+.picksy-mascot[data-mood="happy"] .picksy-mouth-smirk { opacity: 0; }
+
+/* Mood: excited */
+.picksy-mascot[data-mood="excited"] .picksy-figure { animation-duration: 2.4s; }
+.picksy-mascot[data-mood="excited"] .picksy-mouth-happy { opacity: 1; stroke-width: 4; }
+.picksy-mascot[data-mood="excited"] .picksy-eye { transform: scale(1.15); }
+
+/* Mood: tired (morning) */
+.picksy-mascot[data-mood="tired"] .picksy-figure { animation-duration: 7s; }
+.picksy-mascot[data-mood="tired"] .picksy-eye { transform: scaleY(.45); }
+.picksy-mascot[data-mood="tired"] .picksy-mouth-tired   { opacity: 1; }
+.picksy-mascot[data-mood="tired"] .picksy-mouth-happy,
+.picksy-mascot[data-mood="tired"] .picksy-mouth-sad,
+.picksy-mascot[data-mood="tired"] .picksy-mouth-think,
+.picksy-mascot[data-mood="tired"] .picksy-mouth-shocked,
+.picksy-mascot[data-mood="tired"] .picksy-mouth-wink,
+.picksy-mascot[data-mood="tired"] .picksy-mouth-smirk { opacity: 0; }
+.picksy-mascot[data-mood="tired"] .picksy-brow { transform: translateY(2px) rotate(-8deg); }
+.picksy-mascot[data-mood="tired"] .picksy-brow.right { transform: translateY(2px) rotate(8deg); }
+
+/* Mood: thinking — used during AI loading */
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-think { opacity: 1; }
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-happy,
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-sad,
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-shocked,
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-tired,
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-wink,
+.picksy-mascot[data-mood="thinking"] .picksy-mouth-smirk { opacity: 0; }
+.picksy-mascot[data-mood="thinking"] .picksy-brow.left  { transform: translateY(-4px) rotate(-22deg); }
+.picksy-mascot[data-mood="thinking"] .picksy-brow.right { transform: translateY(0)    rotate(6deg); }
+.picksy-mascot[data-mood="thinking"] .picksy-figure { animation: picksy-think 2.4s ease-in-out infinite; }
+
+@keyframes picksy-think {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  25%      { transform: rotate(2deg)  translateY(-3px); }
+  50%      { transform: rotate(-1deg) translateY(0); }
+  75%      { transform: rotate(3deg)  translateY(-2px); }
+}
+
+/* Mood: sad / lost */
+.picksy-mascot[data-mood="sad"] .picksy-mouth-sad { opacity: 1; }
+.picksy-mascot[data-mood="sad"] .picksy-mouth-happy,
+.picksy-mascot[data-mood="sad"] .picksy-mouth-think,
+.picksy-mascot[data-mood="sad"] .picksy-mouth-shocked,
+.picksy-mascot[data-mood="sad"] .picksy-mouth-tired,
+.picksy-mascot[data-mood="sad"] .picksy-mouth-wink,
+.picksy-mascot[data-mood="sad"] .picksy-mouth-smirk { opacity: 0; }
+.picksy-mascot[data-mood="sad"] .picksy-brow.left  { transform: translateY(-3px) rotate(18deg); }
+.picksy-mascot[data-mood="sad"] .picksy-brow.right { transform: translateY(-3px) rotate(-18deg); }
+.picksy-mascot[data-mood="sad"] .picksy-figure { animation-duration: 6.5s; }
+
+/* Mood: shocked / surprised */
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-shocked { opacity: 1; }
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-happy,
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-sad,
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-think,
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-tired,
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-wink,
+.picksy-mascot[data-mood="shocked"] .picksy-mouth-smirk { opacity: 0; }
+.picksy-mascot[data-mood="shocked"] .picksy-eye { transform: scale(1.25); }
+.picksy-mascot[data-mood="shocked"] .picksy-brow { transform: translateY(-5px); }
+
+/* Mood: wink — for AI commentary */
+.picksy-mascot[data-mood="wink"] .picksy-mouth-wink { opacity: 1; }
+.picksy-mascot[data-mood="wink"] .picksy-mouth-happy,
+.picksy-mascot[data-mood="wink"] .picksy-mouth-sad,
+.picksy-mascot[data-mood="wink"] .picksy-mouth-think,
+.picksy-mascot[data-mood="wink"] .picksy-mouth-shocked,
+.picksy-mascot[data-mood="wink"] .picksy-mouth-tired,
+.picksy-mascot[data-mood="wink"] .picksy-mouth-smirk { opacity: 0; }
+.picksy-mascot[data-mood="wink"] .picksy-eye.right { transform: scaleY(.08); }
+
+/* Mood: smirk — sassy commentary */
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-smirk { opacity: 1; }
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-happy,
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-sad,
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-think,
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-shocked,
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-tired,
+.picksy-mascot[data-mood="smirk"] .picksy-mouth-wink { opacity: 0; }
+.picksy-mascot[data-mood="smirk"] .picksy-brow.left  { transform: translateY(-3px) rotate(-14deg); }
+
+/* All mouths default-hidden except .picksy-mouth-happy */
+.picksy-mouth-sad,
+.picksy-mouth-think,
+.picksy-mouth-shocked,
+.picksy-mouth-tired,
+.picksy-mouth-wink,
+.picksy-mouth-smirk { opacity: 0; transition: opacity .25s ease; }
+.picksy-mouth-happy { opacity: 1; transition: opacity .25s ease; }
+
+/* ------------------------------------------------------------
+   Thinking dots for loading state
+   ------------------------------------------------------------ */
+.picksy-thinking-dots {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.picksy-thinking-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--picksy-purple), var(--picksy-pink));
+  animation: picksy-dot 1.2s ease-in-out infinite;
+}
+.picksy-thinking-dots span:nth-child(2) { animation-delay: .2s; }
+.picksy-thinking-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes picksy-dot {
+  0%, 60%, 100% { transform: translateY(0) scale(1); opacity: .4; }
+  30%           { transform: translateY(-5px) scale(1.3); opacity: 1; }
+}
+
+/* Film strip "feet" beneath the reel */
+.picksy-strip {
+  margin-top: -10px;
+  width: 70%;
+  height: 16px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0 6px,
+      rgba(0,0,0,.6) 6px 9px) ,
+    linear-gradient(180deg, #2d1b5a, #1a0d3d);
+  border-radius: 3px;
+  position: relative;
+  opacity: .8;
+  transform: perspective(80px) rotateX(45deg);
+  box-shadow: 0 4px 16px rgba(0,0,0,.5);
+}
+
+/* ------------------------------------------------------------
+   Hero placement — replaces the old plain CTA button
+   ------------------------------------------------------------ */
+.picksy-hero-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 14px auto 18px;
+}
+.picksy-hero-wrap .picksy-bubble {
+  max-width: 360px;
+}
+.picksy-hero-wrap #hero-mascot {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .25s var(--ease, cubic-bezier(.22, 1, .36, 1)), filter .25s ease;
+}
+.picksy-hero-wrap #hero-mascot:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 14px 24px rgba(236, 72, 153, .35));
+}
+.picksy-hero-wrap #hero-mascot:active { transform: translateY(0) scale(.97); }
+@keyframes picksy-hero-boop {
+  0%   { transform: scale(1) rotate(0); }
+  25%  { transform: scale(1.08) rotate(-4deg); }
+  55%  { transform: scale(.95) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.picksy-hero-boop {
+  animation: picksy-hero-boop .55s var(--ease, cubic-bezier(.22, 1, .36, 1));
+}
+
+.picksy-hero-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border: 0;
+  border-radius: 99px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--picksy-purple), var(--picksy-pink));
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(139,92,246,.45);
+  transition: transform .2s cubic-bezier(.2,.7,.2,1.4), box-shadow .2s ease;
+  letter-spacing: .2px;
+}
+.picksy-hero-cta:hover  { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(139,92,246,.6); }
+.picksy-hero-cta:active { transform: translateY(0)    scale(.97); }
+.picksy-hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--picksy-purple), var(--picksy-pink));
+  filter: blur(14px);
+  opacity: .55;
+  z-index: -1;
+  animation: picksy-glow 3.6s ease-in-out infinite;
+}
+@keyframes picksy-glow {
+  0%, 100% { opacity: .45; }
+  50%      { opacity: .8; }
+}
+
+/* ------------------------------------------------------------
+   Inline mascot for empty saved list
+   ------------------------------------------------------------ */
+.picksy-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+}
+.picksy-empty .picksy-bubble {
+  max-width: 280px;
+  font-size: .88rem;
+}
+
+/* ------------------------------------------------------------
+   AI-result commentary bar — appears under the result card
+   ------------------------------------------------------------ */
+.picksy-commentary {
+  margin: 16px auto 28px;
+  max-width: 640px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(139,92,246,.10), rgba(236,72,153,.08));
+  border: 1px solid rgba(167,139,250,.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: picksy-bubble-in .5s cubic-bezier(.2,.7,.2,1.05) both;
+  position: relative;
+}
+.picksy-commentary .picksy-mascot { flex-shrink: 0; }
+.picksy-commentary .picksy-mascot .picksy-figure { filter: drop-shadow(0 8px 18px rgba(139,92,246,.35)); }
+.picksy-commentary-text {
+  flex: 1;
+  min-width: 0;
+  font-size: .92rem;
+  font-weight: 600;
+  color: #f5f5ff;
+  line-height: 1.45;
+}
+.picksy-commentary-text small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--picksy-purple), var(--picksy-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.picksy-commentary-close {
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,.55);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all .2s ease;
+}
+.picksy-commentary-close:hover { color: #fff; background: rgba(255,255,255,.08); }
+
+/* ------------------------------------------------------------
+   Loading-overlay mascot — replaces plain spinner
+   ------------------------------------------------------------ */
+.picksy-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.picksy-loading-content .picksy-bubble {
+  font-size: .88rem;
+}
+
+/* ------------------------------------------------------------
+   Responsive tweaks
+   ------------------------------------------------------------ */
+@media (max-width: 520px) {
+  .picksy-mascot[data-size="lg"] .picksy-figure { width: 160px; height: 160px; }
+  .picksy-mascot[data-size="xl"] .picksy-figure { width: 180px; height: 180px; }
+  .picksy-bubble { font-size: .85rem; padding: 10px 14px; max-width: 280px; }
+  .picksy-commentary { padding: 10px 12px; gap: 10px; flex-wrap: wrap; }
+  .picksy-commentary .picksy-mascot[data-size="sm"] .picksy-figure { width: 64px; height: 64px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .picksy-figure,
+  .picksy-figure::before,
+  .picksy-eye,
+  .picksy-hero-cta::before,
+  .picksy-thinking-dots span {
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   Floating Picksy FAB — REMOVED.
+
+   The mascot used to live as a fixed floating button in the page
+   corner. We removed it because the homepage already has a fire-menu
+   FAB (.fab-container) and the duplicate looked busy. Picksy now only
+   appears inline (hero, loading overlay, commentary cards, quiz, match,
+   404, share cards, etc.).
+
+   We keep a small defensive rule that hides any leftover .picksy-fab
+   nodes that might be served from a stale cache so they don't pop in
+   for a frame before mascot.js cleans them up.
+   ------------------------------------------------------------ */
+.picksy-fab,
+.picksy-fab-bubble { display: none !important; }
+
+/* Page-specific commentary cards inherit .picksy-commentary, but we give
+   the quiz/match intros a subtler look so they don't dominate the page. */
+.picksy-quiz-intro,
+.picksy-match-intro {
+  margin: 0 auto 18px;
+  background: linear-gradient(180deg, rgba(139, 92, 246, .08), rgba(20, 12, 50, .55));
+}
+
+/* v84 serious homepage: keep Picksy in auth/loading flows, but remove the
+   oversized mascot-led hero so the first viewport reads like a product. */
+#hero-mascot-wrap,
+.hero-section .picksy-hero-wrap {
+  display: none !important;
+}

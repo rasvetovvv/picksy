@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>404 — Picksy</title>
+<meta name="theme-color" content="#0a0a1a">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/mascot.css?v=picksy-162">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:#f5f5ff;
+  background:radial-gradient(ellipse at top,#1a0d3d 0%,#0a0a1a 60%,#04040c 100%);
+  min-height:100vh;overflow-x:hidden;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;position:relative;
+  -webkit-font-smoothing:antialiased;
+}
+/* drifting starfield */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.5) 50%,transparent),
+    radial-gradient(1px 1px at 60% 70%,rgba(167,139,250,.7) 50%,transparent),
+    radial-gradient(1.5px 1.5px at 40% 50%,rgba(255,255,255,.4) 50%,transparent),
+    radial-gradient(1px 1px at 80% 20%,rgba(236,72,153,.6) 50%,transparent),
+    radial-gradient(2px 2px at 90% 60%,rgba(255,255,255,.5) 50%,transparent),
+    radial-gradient(1px 1px at 30% 80%,rgba(167,139,250,.6) 50%,transparent),
+    radial-gradient(1.5px 1.5px at 70% 90%,rgba(255,255,255,.5) 50%,transparent),
+    radial-gradient(1px 1px at 15% 60%,rgba(236,72,153,.4) 50%,transparent);
+  background-size:600px 400px;
+  animation:drift 90s linear infinite;
+  pointer-events:none;opacity:.6;z-index:0;
+}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-200px,-100px)}}
+/* glowing orbs */
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.4;pointer-events:none;z-index:0;animation:float 14s ease-in-out infinite}
+.orb-1{width:340px;height:340px;background:#8b5cf6;top:8%;left:-110px;animation-delay:0s}
+.orb-2{width:280px;height:280px;background:#ec4899;bottom:8%;right:-90px;animation-delay:5s}
+.orb-3{width:220px;height:220px;background:#3b82f6;top:55%;left:58%;animation-delay:9s}
+@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+/* twinkle sparkles */
+.sparkles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.sparkle{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:sparkle 3s ease-in-out infinite}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:.7;transform:scale(1)}}
+.brand{
+  position:absolute;top:18px;left:20px;
+  font-weight:900;font-size:1rem;letter-spacing:-.01em;
+  background:linear-gradient(135deg,#a78bfa,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;
+  text-decoration:none;z-index:2;
+}
+.lang-switch{
+  position:absolute;top:14px;right:14px;display:flex;gap:4px;z-index:2;
+  background:rgba(0,0,0,.3);border-radius:99px;padding:3px;border:1px solid rgba(255,255,255,.07);
+}
+.lang-btn{
+  font-family:inherit;background:transparent;color:rgba(255,255,255,.55);
+  border:0;cursor:pointer;padding:5px 11px;border-radius:99px;
+  font-size:.72rem;font-weight:700;transition:all .2s;
+}
+.lang-btn:hover{color:#fff}
+.lang-btn.active{background:rgba(139,92,246,.3);color:#fff}
+.wrap{
+  position:relative;z-index:1;
+  text-align:center;max-width:560px;width:100%;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:28px;
+  padding:46px 32px 36px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07);
+  animation:fadeUp .7s cubic-bezier(.2,.7,.2,1.05) both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.picksy-404-wrap{margin:0 auto 28px;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;min-height:260px;justify-content:flex-end}
+/* The reel itself — oversized + perpetually bobbing so it dominates the
+   error page. Sized via !important to override the .picksy-mascot[data-size]
+   defaults from mascot.css which would otherwise cap it at 200px. */
+.picksy-404-wrap .picksy-mascot{display:inline-block;animation:picksy-404-float 5.5s ease-in-out infinite;filter:drop-shadow(0 30px 50px rgba(139,92,246,.35));will-change:transform}
+.picksy-404-wrap .picksy-figure{width:260px!important;height:260px!important;position:relative}
+/* Soft halo pulse behind Picksy — makes the empty page feel alive. */
+.picksy-404-wrap .picksy-figure::after{content:"";position:absolute;inset:-22% -22%;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.45),rgba(236,72,153,.15) 45%,transparent 70%);z-index:-1;animation:picksy-404-halo 4.2s ease-in-out infinite;pointer-events:none}
+/* Slow gentle rotation on hover — invites interaction without distracting. */
+.picksy-404-wrap .picksy-figure:hover{transform:scale(1.04) rotate(-3deg);transition:transform .35s cubic-bezier(.2,.7,.2,1.4)}
+.picksy-404-filmstrip{position:absolute;width:320px;height:42px;bottom:-12px;left:50%;transform:translateX(-50%) perspective(160px) rotateX(58deg);background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(0,0,0,.65) 10px 15px),linear-gradient(180deg,#2d1b5a,#1a0d3d);border-radius:4px;opacity:.55;box-shadow:0 10px 28px rgba(0,0,0,.55);z-index:-1;animation:picksy-404-filmstrip-slide 6s linear infinite}
+/* Three glowing sparkles orbit Picksy slowly. They're purely decorative. */
+.picksy-404-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#fff,#a78bfa 60%,transparent 75%);box-shadow:0 0 14px rgba(167,139,250,.85);opacity:.85;pointer-events:none}
+.picksy-404-spark.s1{top:8%;left:14%;animation:picksy-404-spark1 4.6s ease-in-out infinite}
+.picksy-404-spark.s2{top:18%;right:14%;width:8px;height:8px;animation:picksy-404-spark2 5.2s ease-in-out infinite}
+.picksy-404-spark.s3{bottom:30%;left:8%;width:6px;height:6px;animation:picksy-404-spark3 6.1s ease-in-out infinite}
+@keyframes picksy-404-float{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-14px) rotate(2deg)}
+}
+@keyframes picksy-404-halo{
+  0%,100%{opacity:.55;transform:scale(.95)}
+  50%{opacity:.95;transform:scale(1.08)}
+}
+@keyframes picksy-404-filmstrip-slide{
+  0%{background-position:0 0,0 0}
+  100%{background-position:50px 0,0 0}
+}
+@keyframes picksy-404-spark1{
+  0%,100%{transform:translate(0,0) scale(1);opacity:.85}
+  50%{transform:translate(8px,-10px) scale(1.4);opacity:1}
+}
+@keyframes picksy-404-spark2{
+  0%,100%{transform:translate(0,0) scale(.9);opacity:.75}
+  50%{transform:translate(-10px,8px) scale(1.35);opacity:1}
+}
+@keyframes picksy-404-spark3{
+  0%,100%{transform:translate(0,0) scale(.85);opacity:.7}
+  50%{transform:translate(12px,-6px) scale(1.3);opacity:1}
+}
+@media (max-width:520px){
+  .picksy-404-wrap .picksy-figure{width:200px!important;height:200px!important}
+  .picksy-404-filmstrip{width:240px;height:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  .picksy-404-wrap .picksy-mascot,
+  .picksy-404-wrap .picksy-figure::after,
+  .picksy-404-filmstrip,
+  .picksy-404-spark{animation:none!important}
+}
+.error-code{
+  font-size:clamp(5.5rem,18vw,8.5rem);
+  font-weight:900;line-height:.95;letter-spacing:-.04em;
+  background:linear-gradient(135deg,#fff 0%,#a78bfa 55%,#ec4899 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;
+  margin-bottom:6px;
+  text-shadow:0 0 60px rgba(139,92,246,.25);
+}
+.error-title{
+  font-size:clamp(1.25rem,4vw,1.55rem);font-weight:800;
+  margin-bottom:10px;color:#f5f5ff;
+}
+.error-desc{
+  color:rgba(245,245,255,.6);font-size:.96rem;line-height:1.55;
+  margin-bottom:24px;
+}
+/* recommendation card */
+.rec-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  padding:16px;margin-bottom:24px;
+  text-align:left;display:none;
+  transition:.3s;
+}
+.rec-card.loaded{display:flex;gap:14px;align-items:center;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1.05) both}
+.rec-poster{
+  width:74px;height:108px;object-fit:cover;border-radius:11px;
+  flex-shrink:0;background:rgba(255,255,255,.04);
+  box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+.rec-info{flex:1;min-width:0}
+.rec-label{font-size:.66rem;color:#a78bfa;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-weight:800}
+.rec-title{font-size:1.02rem;font-weight:800;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
+.rec-meta{font-size:.78rem;color:rgba(245,245,255,.55);margin-bottom:5px}
+.rec-desc{font-size:.78rem;color:rgba(245,245,255,.5);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+.btn{
+  font-family:inherit;border:0;cursor:pointer;
+  padding:13px 22px;border-radius:14px;
+  font-weight:700;font-size:.92rem;
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .25s cubic-bezier(.2,.7,.2,1);
+  position:relative;overflow:hidden;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#8b5cf6,#ec4899);
+  color:#fff;box-shadow:0 6px 20px rgba(139,92,246,.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(139,92,246,.55)}
+.btn-secondary{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+}
+.btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(167,139,250,.5)}
+.quick-row{
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+  font-size:.82rem;color:rgba(245,245,255,.55);
+}
+.quick-row a{
+  color:#cbd5e1;text-decoration:none;
+  padding:6px 12px;border-radius:99px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  transition:all .2s;
+}
+.quick-row a:hover{color:#fff;background:rgba(139,92,246,.15);border-color:rgba(167,139,250,.4)}
+@media (max-width:520px){
+  .wrap{padding:38px 22px 28px;border-radius:22px}
+  .popcorn{width:92px;height:92px;font-size:40px}
+  .rec-card.loaded{flex-direction:row;text-align:left}
+  .rec-poster{width:60px;height:90px}
+  .lang-switch{top:10px;right:10px}
+  .brand{top:14px;left:14px;font-size:.92rem}
+  .quick-row{font-size:.78rem}
+}
+@media (prefers-reduced-motion:reduce){
+  body::before,.orb,.popcorn,.popcorn::after,.sparkle{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="sparkles" id="sparkles"></div>
+<a class="brand" href="/">Picksy</a>
+<div class="lang-switch">
+  <button class="lang-btn" data-lang="uk" type="button">UK</button>
+  <button class="lang-btn" data-lang="en" type="button">EN</button>
+</div>
+<main class="wrap">
+  <div class="picksy-404-wrap" aria-hidden="true">
+    <div class="picksy-404-spark s1"></div>
+    <div class="picksy-404-spark s2"></div>
+    <div class="picksy-404-spark s3"></div>
+    <div class="picksy-mascot" data-size="lg" data-mood="sad" id="picksy-404" role="img" aria-label="Picksy загубився серед плівок"></div>
+    <div class="picksy-404-filmstrip"></div>
+  </div>
+  <div class="error-code">404</div>
+  <h1 class="error-title" data-i18n="title">Сторінку не знайдено</h1>
+  <p class="error-desc" data-i18n="desc">Здається, цей сценарій ще не зняли. Але не сумуй — ось що ми тобі підібрали:</p>
+  <div class="rec-card" id="rec-card">
+    <img class="rec-poster" id="rec-poster" src="" alt="">
+    <div class="rec-info">
+      <div class="rec-label" data-i18n="recLabel">Рекомендація</div>
+      <div class="rec-title" id="rec-title"></div>
+      <div class="rec-meta" id="rec-meta"></div>
+      <div class="rec-desc" id="rec-desc"></div>
+    </div>
+  </div>
+  <div class="actions">
+    <a href="/" class="btn btn-primary">
+      <span aria-hidden="true">🏠</span>
+      <span data-i18n="goHome">На головну</span>
+    </a>
+    <a href="/quiz" class="btn btn-secondary">
+      <span aria-hidden="true">🧠</span>
+      <span data-i18n="takeQuiz">Пройти квіз</span>
+    </a>
+  </div>
+  <div class="quick-row">
+    <a href="/?cat=movie" data-i18n="movies">Фільми</a>
+    <a href="/?cat=tv" data-i18n="tv">Серіали</a>
+    <a href="/?cat=book" data-i18n="books">Книги</a>
+    <a href="/faq" data-i18n="faq">FAQ</a>
+  </div>
+</main>
+<script>
+(function(){
+  // sparkles
+  var sp=document.getElementById('sparkles');
+  for(var i=0;i<28;i++){
+    var s=document.createElement('div');
+    s.className='sparkle';
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=Math.random()*5+'s';
+    s.style.animationDuration=(2+Math.random()*3)+'s';
+    sp.appendChild(s);
+  }
+  // i18n
+  var STR={
+    uk:{title:'Сторінку не знайдено',desc:'Здається, цей сценарій ще не зняли. Але не сумуй — ось що ми тобі підібрали:',recLabel:'Рекомендація',goHome:'На головну',takeQuiz:'Пройти квіз',movies:'Фільми',tv:'Серіали',books:'Книги',faq:'FAQ'},
+    en:{title:'Page not found',desc:"Looks like this scene wasn't shot yet. But don't worry — here's something we picked for you:",recLabel:'Pick for you',goHome:'Go home',takeQuiz:'Take quiz',movies:'Movies',tv:'TV',books:'Books',faq:'FAQ'}
+  };
+  var lang=(function(){
+    try{
+      var p=new URLSearchParams(location.search).get('lang');
+      if(p==='uk'||p==='en')return p;
+      var ls=localStorage.getItem('pfm_lang')||localStorage.getItem('picksy_faq_lang');
+      if(ls==='uk'||ls==='en')return ls;
+      var nav=(navigator.language||'uk').slice(0,2).toLowerCase();
+      return nav==='uk'||nav==='ru'?'uk':'en';
+    }catch(e){return 'uk';}
+  })();
+  function applyI18n(){
+    document.documentElement.setAttribute('lang',lang);
+    document.title=(lang==='uk'?'404 — Сторінку не знайдено · Picksy':'404 — Page not found · Picksy');
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n');
+      if(STR[lang]&&STR[lang][k])el.textContent=STR[lang][k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-lang')===lang);
+    });
+  }
+  function setLang(l){
+    lang=l;
+    try{localStorage.setItem('pfm_lang',l);localStorage.setItem('picksy_faq_lang',l);}catch(e){}
+    applyI18n();
+    loadRec();
+  }
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'));});
+  });
+  applyI18n();
+  // Random movie recommendation
+  function loadRec(){
+    fetch('/api/random-movie?lang='+lang,{cache:'no-store'}).then(function(r){return r.json();}).then(function(m){
+      if(!m||!m.title)return;
+      document.getElementById('rec-title').textContent=m.title;
+      var year=(m.release_date||'').split('-')[0]||'';
+      document.getElementById('rec-meta').textContent='⭐ '+(m.vote_average||'?')+(year?' • '+year:'');
+      document.getElementById('rec-desc').textContent=m.overview||'';
+      var poster=m.poster||'';
+      if(poster){document.getElementById('rec-poster').src=poster;}
+      document.getElementById('rec-card').classList.add('loaded');
+    }).catch(function(){});
+  }
+  loadRec();
+})();
+</script>
+<script src="/js/mascot.js?v=picksy-162"></script>
+<script>
+(function(){
+  function mount(){
+    var host=document.getElementById('picksy-404');
+    if(!host||!window.Picksy)return;
+    host.innerHTML='<div class="picksy-figure">'+window.Picksy.svg({label:'Picksy лост серед плівок'})+'</div>';
+    // Sad mood already on the element. After 1.5s wink to soften the vibe.
+    setTimeout(function(){host.setAttribute('data-mood','wink');},2400);
+    setTimeout(function(){host.setAttribute('data-mood','sad');},4200);
+    setInterval(function(){
+      var moods=['sad','tired','sad','wink','sad'];
+      host.setAttribute('data-mood',moods[Math.floor(Math.random()*moods.length)]);
+    },5200);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+})();
+</script>
+</body>
+</html>

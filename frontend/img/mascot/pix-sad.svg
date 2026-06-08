@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Picksy mascot — sad">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.45"/>
+      <stop offset="55%" stop-color="#8b5cf6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0a0a14" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="reelOuter" cx="38%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#3a2670"/>
+      <stop offset="55%" stop-color="#1f1340"/>
+      <stop offset="100%" stop-color="#0d0820"/>
+    </radialGradient>
+    <radialGradient id="reelRim" cx="50%" cy="50%" r="50%">
+      <stop offset="80%" stop-color="#0a0418" stop-opacity="0"/>
+      <stop offset="95%" stop-color="#0a0418" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0a0418" stop-opacity="0.95"/>
+    </radialGradient>
+    <radialGradient id="projectorBeam" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#fff5e0"/>
+      <stop offset="55%" stop-color="#ffd56b"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </radialGradient>
+    <radialGradient id="innerGlow" cx="50%" cy="38%" r="60%">
+      <stop offset="0%" stop-color="#fffbef" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#fff5e0" stop-opacity="0.0"/>
+    </radialGradient>
+    <linearGradient id="filmStrip" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2c1a55"/>
+      <stop offset="100%" stop-color="#170a30"/>
+    </linearGradient>
+    <linearGradient id="rimLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="cheekGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Re-usable sprocket hole -->
+    <symbol id="hole" viewBox="-6 -6 12 12">
+      <ellipse cx="0" cy="0" rx="5" ry="3.4" fill="#06030f"/>
+      <ellipse cx="0" cy="-0.6" rx="4" ry="2.4" fill="#1a1135"/>
+    </symbol>
+  </defs>
+
+  <!-- Soft purple halo behind the reel -->
+  <circle cx="120" cy="118" r="112" fill="url(#halo)"/>
+
+  <!-- ===== FILM STRIP (back layer, curls behind head like a scarf) ===== -->
+  <g class="pix-film-back">
+    <!-- Back ribbon arcing from the top-left around behind -->
+    <path d="M52 78 Q40 50 78 38 Q108 30 128 36"
+          stroke="url(#filmStrip)" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <!-- Perforations on back ribbon -->
+    <g fill="#fff5e0">
+      <rect x="55" y="64" width="3" height="6" rx="1" transform="rotate(-50 56.5 67)"/>
+      <rect x="62" y="55" width="3" height="6" rx="1" transform="rotate(-40 63.5 58)"/>
+      <rect x="74" y="46" width="3" height="6" rx="1" transform="rotate(-25 75.5 49)"/>
+      <rect x="89" y="40" width="3" height="6" rx="1" transform="rotate(-10 90.5 43)"/>
+      <rect x="105" y="36" width="3" height="6" rx="1" transform="rotate(0 106.5 39)"/>
+    </g>
+  </g>
+
+  <!-- ===== REEL BODY ===== -->
+  <!-- Drop shadow / floating shadow under reel -->
+  <ellipse cx="120" cy="216" rx="58" ry="8" fill="#000000" opacity="0.45"/>
+
+  <!-- Outer disc -->
+  <circle cx="120" cy="118" r="92" fill="url(#reelOuter)"/>
+  <!-- Outer rim shadow -->
+  <circle cx="120" cy="118" r="92" fill="url(#reelRim)"/>
+  <!-- Top rim highlight (glassy) -->
+  <path d="M48 100 Q70 60 120 56 Q170 60 192 100"
+        stroke="url(#rimLight)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Sprocket holes (8 around the disc, r≈78 from center) -->
+  <g class="pix-holes">
+    <use href="#hole" x="120" y="40" width="14" height="14"/>
+    <use href="#hole" x="175" y="63" width="14" height="14" transform="rotate(45 182 70)"/>
+    <use href="#hole" x="198" y="118" width="14" height="14" transform="rotate(90 205 125)"/>
+    <use href="#hole" x="175" y="173" width="14" height="14" transform="rotate(135 182 180)"/>
+    <use href="#hole" x="120" y="196" width="14" height="14"/>
+    <use href="#hole" x="65" y="173" width="14" height="14" transform="rotate(45 72 180)"/>
+    <use href="#hole" x="42" y="118" width="14" height="14" transform="rotate(90 49 125)"/>
+    <use href="#hole" x="65" y="63" width="14" height="14" transform="rotate(135 72 70)"/>
+  </g>
+
+  <!-- Inner ring decoration (subtle ridge) -->
+  <circle cx="120" cy="118" r="68" fill="none" stroke="#3d2872" stroke-width="1.4" opacity="0.55"/>
+
+  <!-- ===== PROJECTOR FACE (glowing center) ===== -->
+  <!-- Beam glow halo behind face area -->
+  <circle cx="120" cy="118" r="56" fill="url(#projectorBeam)" opacity="0.95"/>
+  <!-- Top inner glow highlight -->
+  <circle cx="120" cy="110" r="50" fill="url(#innerGlow)"/>
+  <!-- Glass inner ring -->
+  <circle cx="120" cy="118" r="56" fill="none" stroke="#ffe0a3" stroke-width="2.2" opacity="0.85"/>
+  <circle cx="120" cy="118" r="56" fill="none" stroke="#a35e0a" stroke-width="0.7" opacity="0.4"/>
+
+  <!-- ===== CHEEKS (warm blush on the glow face) ===== -->
+  <ellipse cx="92" cy="138" rx="11" ry="6" fill="url(#cheekGlow)"/>
+  <ellipse cx="148" cy="138" rx="11" ry="6" fill="url(#cheekGlow)"/>
+
+  <!-- ===== EYES (big anime-ish, on glowing face) ===== -->
+  <g class="pix-eyes">
+    <!-- Sad droopy eyes (lower lids covering the top quarter) -->
+    <ellipse cx="103" cy="118" rx="11" ry="13" fill="#1a0d2e"/>
+    <ellipse cx="103" cy="118" rx="9" ry="11" fill="#0a0418"/>
+    <ellipse cx="106" cy="115" rx="2.4" ry="3" fill="#ffffff" opacity="0.9"/>
+    <!-- droopy upper lid -->
+    <path d="M93 110 Q103 116 113 110 L113 100 L93 100 Z" fill="#fff5e0"/>
+    <!-- subtle eye line -->
+    <path d="M93 112 Q103 118 113 112" stroke="#3a1820" stroke-width="1.6" fill="none" opacity="0.6"/>
+
+    <ellipse cx="137" cy="118" rx="11" ry="13" fill="#1a0d2e"/>
+    <ellipse cx="137" cy="118" rx="9" ry="11" fill="#0a0418"/>
+    <ellipse cx="140" cy="115" rx="2.4" ry="3" fill="#ffffff" opacity="0.9"/>
+    <path d="M127 110 Q137 116 147 110 L147 100 L127 100 Z" fill="#fff5e0"/>
+    <path d="M127 112 Q137 118 147 112" stroke="#3a1820" stroke-width="1.6" fill="none" opacity="0.6"/>
+
+    <!-- Slight inward eyebrow tilt to look concerned -->
+    <path d="M92 96 Q104 102 114 100" stroke="#3a1820" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.75"/>
+    <path d="M126 100 Q136 102 148 96" stroke="#3a1820" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.75"/>
+  </g>
+
+  <!-- ===== MOUTH (small smile) ===== -->
+  <g class="pix-mouth">
+    <!-- Small concerned frown -->
+    <path d="M112 148 Q120 142 128 148"
+          stroke="#3a1820" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  </g>
+
+    <!-- Single tear -->
+  <g class="pix-tear">
+    <path d="M93 132 Q90 140 96 142 Q102 140 99 132 Q96 128 93 132 Z" fill="#7dd3fc" opacity="0.95"/>
+    <ellipse cx="95" cy="135" rx="1.2" ry="2" fill="#ffffff" opacity="0.85"/>
+  </g>
+
+  <!-- ===== FILM STRIP TAIL (front, curling out from right side) ===== -->
+  <g class="pix-film-front">
+    <path d="M198 130 Q230 145 215 178 Q205 200 178 205"
+          stroke="url(#filmStrip)" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <!-- Perforations on tail -->
+    <g fill="#fff5e0">
+      <rect x="206" y="138" width="3" height="6" rx="1" transform="rotate(40 207.5 141)"/>
+      <rect x="218" y="152" width="3" height="6" rx="1" transform="rotate(60 219.5 155)"/>
+      <rect x="222" y="170" width="3" height="6" rx="1" transform="rotate(85 223.5 173)"/>
+      <rect x="216" y="187" width="3" height="6" rx="1" transform="rotate(110 217.5 190)"/>
+      <rect x="200" y="200" width="3" height="6" rx="1" transform="rotate(135 201.5 203)"/>
+    </g>
+    <!-- Tip frame (a tiny film cell at end of ribbon) -->
+    <rect x="172" y="198" width="14" height="11" rx="1.5" fill="#0d0820" stroke="#ec4899" stroke-width="1.2"/>
+    <rect x="174" y="200" width="10" height="7" rx="0.5" fill="#ec4899" opacity="0.55"/>
+  </g>
+
+  <!-- ===== HUB BOLTS (tiny cute "ears" / mounting bolts) ===== -->
+  <g class="pix-bolts">
+    <!-- Left bolt -->
+    <circle cx="34" cy="118" r="9" fill="url(#reelOuter)" stroke="#0a0418" stroke-width="1.2"/>
+    <circle cx="34" cy="118" r="4" fill="#06030f"/>
+    <circle cx="34" cy="116" r="1.8" fill="#a78bfa" opacity="0.7"/>
+    <!-- Right bolt -->
+    <circle cx="206" cy="118" r="9" fill="url(#reelOuter)" stroke="#0a0418" stroke-width="1.2"/>
+    <circle cx="206" cy="118" r="4" fill="#06030f"/>
+    <circle cx="206" cy="116" r="1.8" fill="#ec4899" opacity="0.7"/>
+  </g>
+
+  <!-- ===== FRONT GLASSY HIGHLIGHT (on outer disc) ===== -->
+  <path d="M58 90 Q90 60 130 60" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.18"/>
+</svg>

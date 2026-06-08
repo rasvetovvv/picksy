@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "q1_evening",
+      "question": "Який ідеальний вечір під кіно?",
+      "answers": [
+        {
+          "text": "Сам у темряві, чай, повільний фільм на 3 години",
+          "emoji": "🕯️",
+          "weights": {"arthaus-visionary": 3, "indie-mumblecore": 2, "dark-philosopher": 2, "ghibli-dreamer": 1, "horror-psycho": 1}
+        },
+        {
+          "text": "Кав'ярня вранці, нотатки, м'яке світло",
+          "emoji": "☕",
+          "weights": {"indie-mumblecore": 3, "nineties-romantic": 2, "arthaus-visionary": 1, "golden-age-classicist": 1, "doc-skeptic": 1, "absurd-comedian": 1}
+        },
+        {
+          "text": "Друзі, попкорн, повна гучність",
+          "emoji": "🍿",
+          "weights": {"adrenaline-bro": 3, "teen-nostalgic": 3, "absurd-comedian": 2, "anime-otaku": 1}
+        },
+        {
+          "text": "Самотня нічна прогулянка, потім нуар у навушниках",
+          "emoji": "🌃",
+          "weights": {"neo-noir-detective": 3, "dark-philosopher": 2, "crime-epic": 1, "arthaus-visionary": 1}
+        }
+      ]
+    },
+    {
+      "id": "q2_focus",
+      "question": "Що для тебе найважливіше у фільмі?",
+      "answers": [
+        {
+          "text": "Кадр і світло — як живопис",
+          "emoji": "🎨",
+          "weights": {"arthaus-visionary": 3, "golden-age-classicist": 2, "neo-noir-detective": 2, "ghibli-dreamer": 1}
+        },
+        {
+          "text": "Сюжетний поворот, від якого «о боже»",
+          "emoji": "🔀",
+          "weights": {"quiet-cryptic-child": 3, "crime-epic": 2, "doc-skeptic": 1, "horror-psycho": 1}
+        },
+        {
+          "text": "Емоція в очах персонажа",
+          "emoji": "💧",
+          "weights": {"indie-mumblecore": 3, "nineties-romantic": 2, "ghibli-dreamer": 2, "dark-philosopher": 1}
+        },
+        {
+          "text": "Адреналін, рух, шок",
+          "emoji": "⚡",
+          "weights": {"adrenaline-bro": 3, "anime-otaku": 2, "crime-epic": 1, "horror-psycho": 1, "absurd-comedian": 1}
+        }
+      ]
+    },
+    {
+      "id": "q3_pace",
+      "question": "Який темп фільму твій?",
+      "answers": [
+        {
+          "text": "Повільний, медитативний — паузи довші за діалоги",
+          "emoji": "🐢",
+          "weights": {"arthaus-visionary": 3, "ghibli-dreamer": 2, "indie-mumblecore": 2, "dark-philosopher": 1, "doc-skeptic": 1}
+        },
+        {
+          "text": "Розмірений, з оркестровою елегантністю",
+          "emoji": "🎻",
+          "weights": {"golden-age-classicist": 3, "crime-epic": 2, "cosmic-futurist": 2, "doc-skeptic": 2}
+        },
+        {
+          "text": "Динамічний, але з довгими розмовами",
+          "emoji": "🎙️",
+          "weights": {"quiet-cryptic-child": 3, "absurd-comedian": 2, "neo-noir-detective": 2, "indie-mumblecore": 1}
+        },
+        {
+          "text": "Без зупинок — монтаж-блискавка",
+          "emoji": "💥",
+          "weights": {"adrenaline-bro": 3, "anime-otaku": 2, "absurd-comedian": 1, "teen-nostalgic": 1}
+        }
+      ]
+    },
+    {
+      "id": "q4_runtime",
+      "question": "Фільм триває 3 години. Твоя реакція?",
+      "answers": [
+        {
+          "text": "Чудово — нарешті є про що говорити",
+          "emoji": "🎬",
+          "weights": {"crime-epic": 3, "arthaus-visionary": 1, "cosmic-futurist": 2, "dark-philosopher": 1, "indie-mumblecore": 1}
+        },
+        {
+          "text": "Окей, якщо ідея того варта",
+          "emoji": "🤔",
+          "weights": {"doc-skeptic": 3, "golden-age-classicist": 2, "neo-noir-detective": 1, "horror-psycho": 1, "indie-mumblecore": 2, "absurd-comedian": 1}
+        },
+        {
+          "text": "Тільки якщо це Нолан або Вільнев",
+          "emoji": "🌌",
+          "weights": {"cosmic-futurist": 3, "dark-philosopher": 2, "anime-otaku": 1, "adrenaline-bro": 1, "neo-noir-detective": 2}
+        },
+        {
+          "text": "Задовго. 90 хвилин — золото.",
+          "emoji": "⏱️",
+          "weights": {"nineties-romantic": 3, "teen-nostalgic": 2, "absurd-comedian": 3, "ghibli-dreamer": 1}
+        }
+      ]
+    },
+    {
+      "id": "q5_ending",
+      "question": "Якою має бути кінцівка?",
+      "answers": [
+        {
+          "text": "Хепі-енд, всі обнялися",
+          "emoji": "💕",
+          "weights": {"nineties-romantic": 3, "teen-nostalgic": 2, "ghibli-dreamer": 2, "golden-age-classicist": 1, "absurd-comedian": 1}
+        },
+        {
+          "text": "Відкрита — додумай сам",
+          "emoji": "🌫️",
+          "weights": {"arthaus-visionary": 3, "indie-mumblecore": 3, "neo-noir-detective": 2, "doc-skeptic": 2, "cosmic-futurist": 1}
+        },
+        {
+          "text": "Поворот в останні п'ять хвилин",
+          "emoji": "🎭",
+          "weights": {"quiet-cryptic-child": 3, "crime-epic": 2, "horror-psycho": 2, "dark-philosopher": 1}
+        },
+        {
+          "text": "Хай боляче. Хай ламає.",
+          "emoji": "🜏",
+          "weights": {"dark-philosopher": 3, "horror-psycho": 2, "anime-otaku": 1, "neo-noir-detective": 1}
+        }
+      ]
+    },
+    {
+      "id": "q6_soundtrack",
+      "question": "Яка музика грає під фільм?",
+      "answers": [
+        {
+          "text": "Симфонічний оркестр (Циммер, Морріконе)",
+          "emoji": "🎼",
+          "weights": {"cosmic-futurist": 3, "crime-epic": 2, "golden-age-classicist": 2, "adrenaline-bro": 1, "doc-skeptic": 1}
+        },
+        {
+          "text": "Synth-поп 80-х, vaporwave, Tangerine Dream",
+          "emoji": "🌌",
+          "weights": {"teen-nostalgic": 3, "anime-otaku": 2, "neo-noir-detective": 2, "absurd-comedian": 1}
+        },
+        {
+          "text": "Тиша. Або фортепіано на одній ноті.",
+          "emoji": "🤫",
+          "weights": {"arthaus-visionary": 3, "indie-mumblecore": 2, "horror-psycho": 2, "ghibli-dreamer": 1}
+        },
+        {
+          "text": "Гучний рок, металика, пост-панк",
+          "emoji": "🎸",
+          "weights": {"adrenaline-bro": 3, "dark-philosopher": 2, "quiet-cryptic-child": 2, "absurd-comedian": 1}
+        }
+      ]
+    },
+    {
+      "id": "q7_visual",
+      "question": "Який візуал тебе зачаровує?",
+      "answers": [
+        {
+          "text": "Чорно-біла плівка, м'який фокус",
+          "emoji": "🎞️",
+          "weights": {"golden-age-classicist": 3, "arthaus-visionary": 2, "indie-mumblecore": 1, "doc-skeptic": 1}
+        },
+        {
+          "text": "Намальоване, аніме-стиль, акварель",
+          "emoji": "🌸",
+          "weights": {"ghibli-dreamer": 3, "anime-otaku": 3, "teen-nostalgic": 1, "absurd-comedian": 2}
+        },
+        {
+          "text": "Холодний хайтек, IMAX-масштаб",
+          "emoji": "🛰️",
+          "weights": {"cosmic-futurist": 3, "neo-noir-detective": 2, "adrenaline-bro": 1, "dark-philosopher": 1}
+        },
+        {
+          "text": "Червоне світло, текстура, кров на стіні",
+          "emoji": "🩸",
+          "weights": {"horror-psycho": 3, "dark-philosopher": 2, "crime-epic": 1, "neo-noir-detective": 1}
+        }
+      ]
+    },
+    {
+      "id": "q8_seeking",
+      "question": "Що ти шукаєш у кіно найчастіше?",
+      "answers": [
+        {
+          "text": "Втечу — дозу романтики й тепла",
+          "emoji": "🌷",
+          "weights": {"nineties-romantic": 3, "ghibli-dreamer": 2, "teen-nostalgic": 2, "golden-age-classicist": 1}
+        },
+        {
+          "text": "Думки — складні ідеї, після яких варто помовчати",
+          "emoji": "🧠",
+          "weights": {"cosmic-futurist": 3, "arthaus-visionary": 2, "doc-skeptic": 2, "dark-philosopher": 1}
+        },
+        {
+          "text": "Адреналін — фізичне пробудження",
+          "emoji": "🔥",
+          "weights": {"adrenaline-bro": 3, "anime-otaku": 2, "crime-epic": 1, "absurd-comedian": 1}
+        },
+        {
+          "text": "Шок — щоб не міг забути ще тиждень",
+          "emoji": "😱",
+          "weights": {"horror-psycho": 3, "dark-philosopher": 2, "quiet-cryptic-child": 2, "neo-noir-detective": 1}
+        }
+      ]
+    },
+    {
+      "id": "q9_short",
+      "question": "У тебе тільки 90 хвилин. Що обираєш?",
+      "answers": [
+        {
+          "text": "Ромком 90-х із Мег Раян або Г'ю Грантом",
+          "emoji": "💌",
+          "weights": {"nineties-romantic": 3, "absurd-comedian": 3, "teen-nostalgic": 1, "golden-age-classicist": 1, "indie-mumblecore": 1}
+        },
+        {
+          "text": "Аніме-фільм або щось у Ghibli-стилі",
+          "emoji": "🍃",
+          "weights": {"ghibli-dreamer": 3, "anime-otaku": 3, "teen-nostalgic": 1, "arthaus-visionary": 1}
+        },
+        {
+          "text": "Повільний арт-хорор від А24",
+          "emoji": "🕯️",
+          "weights": {"horror-psycho": 3, "arthaus-visionary": 2, "dark-philosopher": 2, "neo-noir-detective": 1}
+        },
+        {
+          "text": "Документалку про секту або злочин",
+          "emoji": "🎙️",
+          "weights": {"doc-skeptic": 3, "crime-epic": 2, "dark-philosopher": 1, "neo-noir-detective": 1}
+        }
+      ]
+    },
+    {
+      "id": "q10_humor",
+      "question": "Який гумор тобі ближчий?",
+      "answers": [
+        {
+          "text": "Сухий британський, ритм-комедія, пародія",
+          "emoji": "🎩",
+          "weights": {"absurd-comedian": 3, "quiet-cryptic-child": 2, "doc-skeptic": 2, "golden-age-classicist": 1, "indie-mumblecore": 1}
+        },
+        {
+          "text": "Чорний — після нього незручно",
+          "emoji": "🃏",
+          "weights": {"quiet-cryptic-child": 3, "dark-philosopher": 2, "crime-epic": 1, "horror-psycho": 1}
+        },
+        {
+          "text": "Романтичний, з усмішкою",
+          "emoji": "😊",
+          "weights": {"nineties-romantic": 3, "teen-nostalgic": 2, "golden-age-classicist": 2, "ghibli-dreamer": 1, "indie-mumblecore": 1}
+        },
+        {
+          "text": "Я не за гумором сюди прийшов",
+          "emoji": "😶",
+          "weights": {"dark-philosopher": 3, "arthaus-visionary": 2, "horror-psycho": 2, "cosmic-futurist": 1}
+        }
+      ]
+    },
+    {
+      "id": "q11_director",
+      "question": "З яким режисером ти б випив каву?",
+      "answers": [
+        {
+          "text": "Тарантіно, Лінч, брати Коени",
+          "emoji": "🍒",
+          "weights": {"quiet-cryptic-child": 3, "neo-noir-detective": 2, "absurd-comedian": 1, "crime-epic": 1}
+        },
+        {
+          "text": "Скорсезе, Коппола, Манн",
+          "emoji": "🥃",
+          "weights": {"crime-epic": 3, "neo-noir-detective": 2, "dark-philosopher": 1, "golden-age-classicist": 2, "doc-skeptic": 2}
+        },
+        {
+          "text": "Нолан, Вільнев, Кубрік",
+          "emoji": "🌌",
+          "weights": {"cosmic-futurist": 3, "dark-philosopher": 2, "neo-noir-detective": 1, "adrenaline-bro": 1}
+        },
+        {
+          "text": "Міядзакі, Анно, Сатосі Кон",
+          "emoji": "🍥",
+          "weights": {"ghibli-dreamer": 3, "anime-otaku": 3, "arthaus-visionary": 1, "teen-nostalgic": 2, "indie-mumblecore": 1}
+        }
+      ]
+    },
+    {
+      "id": "q12_word",
+      "question": "Опиши свій смак у кіно одним словом.",
+      "answers": [
+        {
+          "text": "Естетський",
+          "emoji": "🖼️",
+          "weights": {"arthaus-visionary": 3, "golden-age-classicist": 2, "indie-mumblecore": 2, "ghibli-dreamer": 1, "doc-skeptic": 1}
+        },
+        {
+          "text": "Адреналіновий",
+          "emoji": "🔥",
+          "weights": {"adrenaline-bro": 3, "anime-otaku": 2, "crime-epic": 1, "absurd-comedian": 1}
+        },
+        {
+          "text": "Емоційний",
+          "emoji": "💔",
+          "weights": {"nineties-romantic": 3, "teen-nostalgic": 2, "ghibli-dreamer": 2, "indie-mumblecore": 2, "absurd-comedian": 1}
+        },
+        {
+          "text": "Темний",
+          "emoji": "🜏",
+          "weights": {"dark-philosopher": 3, "horror-psycho": 2, "neo-noir-detective": 2, "quiet-cryptic-child": 1}
+        }
+      ]
+    }
+  ]
+}
